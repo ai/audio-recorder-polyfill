@@ -1,0 +1,14 @@
+{
+  "lang": "en",
+  "ignoreCapitalization": true,
+  "excludeFiles": [
+    "docs/*.js.html"
+  ],
+  "dictionary": [
+    "JSDoc",
+    "docdash",
+    "MediaRecorder",
+    "Versioning",
+    "polyfill"
+  ]
+}

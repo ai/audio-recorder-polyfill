@@ -1,0 +1,59 @@
+{
+  "name": "audio-recorder-polyfill",
+  "version": "0.0.0",
+  "description": "MediaRecorder polyfill to record audio in Edge and Safari",
+  "keywords": [
+    "mediarecorder",
+    "polyfill",
+    "edge",
+    "safari",
+    "wav",
+    "webrtc"
+  ],
+  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "license": "MIT",
+  "repository": "ai/audio-recorder-polyfill",
+  "devDependencies": {
+    "docdash": "^0.4.0",
+    "eslint": "^4.11.0",
+    "eslint-config-logux": "^17.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-es5": "^1.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.3.2",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jsdoc": "^3.5.5",
+    "lint-staged": "^5.0.0",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^2.6.2",
+    "size-limit": "^0.13.2",
+    "yaspeller-ci": "^1.0.0"
+  },
+  "scripts": {
+    "lint-staged": "lint-staged",
+    "spellcheck": "yarn docs && yaspeller-ci *.md docs/*.html",
+    "clean": "rimraf docs/",
+    "lint": "eslint *.js test/{**/,}*.js",
+    "docs": "jsdoc --configure .jsdocrc *.js",
+    "test": "yarn lint && size-limit && yarn spellcheck"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-logux/browser"
+  },
+  "size-limit": [
+    {
+      "path": "index.js",
+      "limit": "0 B"
+    }
+  ],
+  "lint-staged": {
+    "*.md": "yaspeller-ci",
+    "*.js": "eslint"
+  },
+  "pre-commit": [
+    "lint-staged"
+  ]
+}
