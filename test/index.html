@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Media Recorder Polyfill</title>
     <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
       body {
         font-family: sans-serif;
         margin: 2rem;
@@ -13,11 +17,17 @@
         margin: 0 auto;
       }
       #demo {
-        text-align: center;
         margin-top: 3rem;
       }
-      #record, #stop {
+      #recordFull, #recordParts, #pause, #resume, #stop {
+        vertical-align: bottom;
         font-size: 150%;
+        height: 2.5rem;
+        width: 4rem;
+      }
+      #recordParts span {
+        vertical-align: 38%;
+        font-size: 50%;
       }
       #support {
         display: none;
@@ -25,8 +35,12 @@
         color: red;
         font-weight: bold;
       }
-      #ul {
-        margin-top: 1em;
+      #list {
+        margin-top: 2rem;
+      }
+      li {
+        list-style: none;
+        margin: 0.5rem 0;
       }
     </style>
   </head>
@@ -37,14 +51,17 @@
         is a MediaRecorder polyfill to record audio in Edge and Safari.
       </p>
       <div id="demo">
-        <button id="record" disabled>Record</button>
-        <button id="stop" disabled>Stop</button>
+        <button id="recordFull" disabled>⏺</button>
+        <button id="recordParts" disabled>⏺<span>1s<span></button>
+        <button id="pause" disabled>⏸</button>
+        <button id="resume" disabled>▶</button>
+        <button id="stop" disabled>⏹</button>
       </div>
       <div id="support">
         Your browser doesn’t support MediaRecorder
         or WebRTC to be able to polyfill MediaRecorder.
       </div>
-      <ul id="events">
+      <ul id="list">
       </ul>
     </article>
   </body>
