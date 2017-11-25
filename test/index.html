@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Media Recorder Polyfill</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 2rem;
+      }
+      article {
+        max-width: 25rem;
+        margin: 0 auto;
+      }
+      #demo {
+        text-align: center;
+        margin-top: 3rem;
+      }
+      #record, #stop {
+        font-size: 150%;
+      }
+      #support {
+        display: none;
+        margin-top: 3rem;
+        color: red;
+        font-weight: bold;
+      }
+      #ul {
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <article>
+      <p>
+        <a href="https://github.com/ai/audio-recorder-polyfill">Audio Recorder Polyfill</a>
+        is a MediaRecorder polyfill to record audio in Edge and Safari.
+      </p>
+      <div id="demo">
+        <button id="record" disabled>Record</button>
+        <button id="stop" disabled>Stop</button>
+      </div>
+      <div id="support">
+        Your browser doesn’t support MediaRecorder
+        or WebRTC to be able to polyfill MediaRecorder.
+      </div>
+      <ul id="events">
+      </ul>
+    </article>
+  </body>
+</html>
