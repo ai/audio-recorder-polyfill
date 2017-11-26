@@ -4,9 +4,14 @@ navigator.mediaDevices = { }
 function AudioContext () { }
 AudioContext.prototype = {
   createGain: function () {
-    return { gain: { value: 1 } }
+    return {
+      connect: function () { },
+      gain: { value: 1 }
+    }
   },
-  createScriptProcessor: function () { }
+  createScriptProcessor: function () {
+    return { connect: function () { } }
+  }
 }
 global.AudioContext = AudioContext
 

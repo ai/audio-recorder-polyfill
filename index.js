@@ -29,8 +29,8 @@ function MediaRecorder (stream) {
 
   this.context = new AudioContext()
   this.monitor = this.context.createGain()
-  this.monitor.gain.value = 0
   this.processor = this.context.createScriptProcessor(4096, 1, 1)
+  this.monitor.gain.value = 0
 }
 
 MediaRecorder.prototype = {
@@ -57,6 +57,8 @@ MediaRecorder.prototype = {
   start: function start (timeslice) {
     if (this.state === 'inactive') {
       this.state = 'recording'
+      this.monitor.connect(this.context.destination)
+      this.processor.connect(this.context.destination)
       this.em.dispatchEvent(new Event('start'))
 
       if (timeslice) {
