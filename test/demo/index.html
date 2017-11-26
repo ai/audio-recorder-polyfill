@@ -23,20 +23,25 @@
       }
       #controls {
         margin-top: 2rem;
+        display: flex;
       }
       #recordFull, #recordParts, #pause, #resume, #stop, #request {
+        flex-grow: 1;
+        width: 4rem;
+        height: 2.5rem;
         vertical-align: bottom;
         font-size: 150%;
-        height: 2.5rem;
-        width: 4rem;
       }
       #recordParts span {
         vertical-align: 38%;
         font-size: 50%;
       }
-      #formats {
+      #formats, #mode {
         margin-top: 0.5rem;
         font-size: 70%;
+      }
+      #mode {
+        float: right;
       }
       #support {
         display: none;
@@ -71,6 +76,9 @@
         <button id="resume" disabled title="Resume">▶</button>
         <button id="stop" disabled title="Stop">⏹</button>
         <button id="request" disabled title="Dump data">▼</button>
+      </div>
+      <div id="mode">
+        Native support, <a href="?polyfill">force polyfill</a>
       </div>
       <div id="formats"></div>
       <div id="support">

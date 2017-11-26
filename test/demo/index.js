@@ -19,11 +19,12 @@ window.onload = function () {
     list.style.display = 'none'
     document.getElementById('controls').style.display = 'none'
     document.getElementById('formats').style.display = 'none'
+    document.getElementById('mode').style.display = 'none'
     document.getElementById('support').style.display = 'block'
     return
   }
 
-  document.getElementById('formats').innerText = 'Supports: ' +
+  document.getElementById('formats').innerText = 'Format: ' +
     TYPES.filter(function (i) {
       return MediaRecorder.isTypeSupported(i)
     }).join(', ')
