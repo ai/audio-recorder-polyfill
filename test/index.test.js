@@ -82,3 +82,8 @@ it('allows to stop paused recording', function () {
   expect(recorder.state).toEqual('inactive')
   expect(events).toEqual(['start', 'pause', 'dataavailable', 'stop'])
 })
+
+it('shows used MIME type', function () {
+  var recorder = new MediaRecorder()
+  expect(recorder.mimeType).toEqual('audio/wav')
+})

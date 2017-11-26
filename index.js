@@ -28,6 +28,12 @@ function MediaRecorder (stream) {
 
 MediaRecorder.prototype = {
   /**
+   * The MIME type that is being used for recording.
+   * @type {string}
+   */
+  mimeType: 'audio/wav',
+
+  /**
    * Begins recording media.
    *
    * @param {number} [timeslice] The milliseconds to record into each `Blob`.
