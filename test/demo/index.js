@@ -5,7 +5,7 @@ var TYPES = ['audio/webm', 'audio/ogg', 'audio/wav']
 
 var recorder, list, recordFull, recordParts, pause, resume, stop, request
 
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function () {
   list = document.getElementById('list')
 
   recordParts = document.getElementById('recordParts')
@@ -38,7 +38,7 @@ window.onload = function () {
 
   recordParts.disabled = false
   recordFull.disabled = false
-}
+})
 
 function startRecording (e) {
   list.innerHTML = ''
