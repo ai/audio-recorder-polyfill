@@ -86,6 +86,10 @@ function requestData () {
 function saveRecord (e) {
   var li = document.createElement('li')
 
+  var strong = document.createElement('strong')
+  strong.innerText = 'dataavailable: '
+  li.appendChild(strong)
+
   var audio = document.createElement('audio')
   audio.controls = true
   audio.src = URL.createObjectURL(e.data)
@@ -100,7 +104,7 @@ function saveRecord (e) {
 
 function changeState (eventName) {
   var li = document.createElement('li')
-  li.innerHTML = '<strong>' + eventName + ':</strong> ' + recorder.state
+  li.innerHTML = '<strong>' + eventName + ': </strong>' + recorder.state
   if (eventName === 'start') {
     li.innerHTML += ', ' + recorder.mimeType
   }
