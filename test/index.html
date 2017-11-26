@@ -16,7 +16,7 @@
         max-width: 28rem;
         margin: 0 auto;
       }
-      #demo {
+      #controls {
         margin-top: 2rem;
       }
       #recordFull, #recordParts, #pause, #resume, #stop, #request {
@@ -28,6 +28,10 @@
       #recordParts span {
         vertical-align: 38%;
         font-size: 50%;
+      }
+      #formats {
+        margin-top: 0.5rem;
+        font-size: 70%;
       }
       #support {
         display: none;
@@ -55,7 +59,7 @@
         <a href="https://github.com/ai/audio-recorder-polyfill">Audio Recorder Polyfill</a>
         is a MediaRecorder polyfill to record audio in Edge and Safari.
       </p>
-      <div id="demo">
+      <div id="controls">
         <button id="recordFull" disabled>⏺</button>
         <button id="recordParts" disabled>⏺<span>1s<span></button>
         <button id="pause" disabled>⏸</button>
@@ -63,6 +67,7 @@
         <button id="stop" disabled>⏹</button>
         <button id="request" disabled>▼</button>
       </div>
+      <div id="formats"></div>
       <div id="support">
         Your browser doesn’t support MediaRecorder
         or WebRTC to be able to polyfill MediaRecorder.

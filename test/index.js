@@ -1,6 +1,7 @@
 var bytes = require('bytes')
 
 var EVENTS = ['start', 'stop', 'pause', 'resume']
+var TYPES = ['audio/webm', 'audio/ogg', 'audio/wav']
 
 var recorder, list, recordFull, recordParts, pause, resume, stop, request
 
@@ -15,10 +16,17 @@ window.onload = function () {
   stop = document.getElementById('stop')
 
   if (typeof MediaRecorder === 'undefined') {
-    document.getElementById('demo').style.display = 'none'
+    list.style.display = 'none'
+    document.getElementById('controls').style.display = 'none'
+    document.getElementById('formats').style.display = 'none'
     document.getElementById('support').style.display = 'block'
     return
   }
+
+  document.getElementById('formats').innerText = 'Supports: ' +
+    TYPES.filter(function (i) {
+      return MediaRecorder.isTypeSupported(i)
+    }).join(', ')
 
   recordParts.addEventListener('click', startRecording)
   recordFull.addEventListener('click', startRecording)
