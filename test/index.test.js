@@ -1,7 +1,6 @@
 var delay = require('nanodelay')
 
-var MediaRecorder = require('../')
-
+navigator.mediaDevices = { }
 function AudioContext () { }
 AudioContext.prototype = {
   createGain: function () {
@@ -9,10 +8,9 @@ AudioContext.prototype = {
   },
   createScriptProcessor: function () { }
 }
+global.AudioContext = AudioContext
 
-beforeEach(function () {
-  global.AudioContext = AudioContext
-})
+var MediaRecorder = require('../')
 
 function listen (recorder) {
   var events = []
@@ -104,13 +102,7 @@ it('shows used MIME type', function () {
 })
 
 it('detects support', function () {
-  expect(MediaRecorder).toBeTruthy()
-})
-
-it('supports webkit prefix', function () {
-  delete window.AudioContext
-  window.webkitAudioContext = AudioContext
-  new MediaRecorder()
+  expect(MediaRecorder.notSupported).toBeFalsy()
 })
 
 it('allow to request captured data', function () {

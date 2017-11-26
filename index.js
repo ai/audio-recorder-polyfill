@@ -1,3 +1,5 @@
+var AudioContext = window.AudioContext || window.webkitAudioContext
+
 /**
  * Audio Recorder with MediaRecorder API.
  *
@@ -25,8 +27,7 @@ function MediaRecorder (stream) {
 
   this.em = document.createDocumentFragment()
 
-  var Context = window.AudioContext || window.webkitAudioContext
-  this.context = new Context()
+  this.context = new AudioContext()
   this.monitor = this.context.createGain()
   this.monitor.gain.value = 0
   this.processor = this.context.createScriptProcessor(4096, 1, 1)
@@ -201,6 +202,6 @@ MediaRecorder.isTypeSupported = function isTypeSupported (mimeType) {
  *   showWarning('Audio recording is not supported in this browser')
  * }
  */
-MediaRecorder.notSupported = !window.AudioContext && !window.webkitAudioContext
+MediaRecorder.notSupported = !navigator.mediaDevices || !AudioContext
 
 module.exports = MediaRecorder
