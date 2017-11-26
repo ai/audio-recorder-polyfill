@@ -18,6 +18,7 @@
     "addEventListener",
     "dispatchEvent",
     "removeEventListener",
-    "timeslice"
+    "timeslice",
+    "notSupported"
   ]
 }

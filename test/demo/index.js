@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
   pause = document.getElementById('pause')
   stop = document.getElementById('stop')
 
-  if (typeof MediaRecorder === 'undefined') {
+  if (!window.MediaRecorder || MediaRecorder.notSupported) {
     list.style.display = 'none'
     document.getElementById('controls').style.display = 'none'
     document.getElementById('formats').style.display = 'none'

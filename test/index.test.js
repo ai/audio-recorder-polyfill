@@ -1,5 +1,14 @@
 var MediaRecorder = require('../')
 
+function AudioContext () { }
+AudioContext.prototype = {
+  createGain: function () {
+    return { gain: { value: 1 } }
+  },
+  createScriptProcessor: function () { }
+}
+global.AudioContext = AudioContext
+
 function listen (recorder) {
   var events = []
   var names = ['start', 'stop', 'pause', 'resume', 'dataavailable']
@@ -86,4 +95,8 @@ it('allows to stop paused recording', function () {
 it('shows used MIME type', function () {
   var recorder = new MediaRecorder()
   expect(recorder.mimeType).toEqual('audio/wav')
+})
+
+it('detects support', function () {
+  expect(MediaRecorder).toBeTruthy()
 })

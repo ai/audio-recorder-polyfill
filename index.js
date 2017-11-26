@@ -24,6 +24,11 @@ function MediaRecorder (stream) {
   this.state = 'inactive'
 
   this.em = document.createDocumentFragment()
+
+  this.context = new AudioContext()
+  this.monitor = this.context.createGain()
+  this.monitor.gain.value = 0
+  this.processor = this.context.createScriptProcessor(4096, 1, 1)
 }
 
 MediaRecorder.prototype = {
@@ -160,5 +165,16 @@ MediaRecorder.prototype = {
 MediaRecorder.isTypeSupported = function isTypeSupported (mimeType) {
   return /audio\/wave?/.test(mimeType)
 }
+
+/**
+ * `true` if MediaRecorder can not be polyfilled in the current browser.
+ * @type {boolean}
+ *
+ * @example
+ * if (!window.MediaRecorder || MediaRecorder.notSupported) {
+ *   showWarning('Audio recording is not supported in this browser')
+ * }
+ */
+MediaRecorder.notSupported = !window.AudioContext
 
 module.exports = MediaRecorder
