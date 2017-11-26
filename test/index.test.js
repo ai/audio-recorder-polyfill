@@ -77,6 +77,7 @@ it('ignores command in wrong state', function () {
   expect(events).toEqual([])
 
   recorder.start()
+  recorder.start()
   recorder.resume()
   expect(recorder.state).toEqual('recording')
   expect(events).toEqual(['start'])

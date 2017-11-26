@@ -39,13 +39,21 @@
   },
   "scripts": {
     "lint-staged": "lint-staged",
-    "spellcheck": "yarn docs && yaspeller-ci *.md docs/*.html",
-    "clean": "rimraf docs/ test/demo/build/",
+    "spell": "yarn docs && yaspeller-ci *.md docs/*.html",
+    "clean": "rimraf docs/ coverage/ test/demo/build/",
     "lint": "eslint *.js test/{**/,}*.js",
     "docs": "jsdoc --configure .jsdocrc *.js",
-    "test": "jest && yarn lint && size-limit && yarn spellcheck && yarn build",
+    "unit": "jest --coverage",
+    "test": "yarn unit && yarn lint && size-limit && yarn spell && yarn build",
     "demo": "webpack-dev-server --config test/demo/webpack.config",
     "build": "webpack --config test/demo/webpack.config -p"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "statements": 100
+      }
+    }
   },
   "eslintConfig": {
     "extends": "eslint-config-logux/browser"
