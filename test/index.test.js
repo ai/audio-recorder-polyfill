@@ -12,6 +12,11 @@ it('saves stream', function () {
   expect(recorder.stream).toBe(stream)
 })
 
+it('has initial state', function () {
+  var recorder = new MediaRecorder()
+  expect(recorder.state).toBe('inactive')
+})
+
 it('saves event listeners', function () {
   var recorder = new MediaRecorder()
   var event = new Event('stop')

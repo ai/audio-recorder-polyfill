@@ -17,6 +17,12 @@ function MediaRecorder (stream) {
    */
   this.stream = stream
 
+  /**
+   * The current state of recording process.
+   * @type {"inactive"|"recording"|"paused"}
+   */
+  this.state = 'inactive'
+
   this.em = document.createDocumentFragment()
 }
 
