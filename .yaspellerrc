@@ -12,6 +12,7 @@
     "polyfill",
     "js",
     "isTypeSupported",
-    "mimeType"
+    "mimeType",
+    "MediaStream"
   ]
 }

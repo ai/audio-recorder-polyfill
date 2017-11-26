@@ -1,10 +1,21 @@
 /**
  * Audio Recorder with MediaRecorder API.
  *
+ * @param {MediaStream} stream The audio stream to record.
+ *
+ * @example
+ * navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+ *   var recorder = new MediaRecorder(stream)
+ * })
+ *
  * @class
  */
-function MediaRecorder () {
-
+function MediaRecorder (stream) {
+  /**
+   * The `MediaStream` passed into the constructor.
+   * @type {MediaStream}
+   */
+  this.stream = stream
 }
 
 MediaRecorder.prototype = { }
