@@ -7,7 +7,10 @@ AudioContext.prototype = {
   },
   createScriptProcessor: function () { }
 }
-global.AudioContext = AudioContext
+
+beforeEach(function () {
+  global.AudioContext = AudioContext
+})
 
 function listen (recorder) {
   var events = []
@@ -100,4 +103,10 @@ it('shows used MIME type', function () {
 
 it('detects support', function () {
   expect(MediaRecorder).toBeTruthy()
+})
+
+it('supports webkit prefix', function () {
+  delete window.AudioContext
+  window.webkitAudioContext = AudioContext
+  new MediaRecorder()
 })
