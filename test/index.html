@@ -13,13 +13,13 @@
         margin: 2rem;
       }
       article {
-        max-width: 25rem;
+        max-width: 28rem;
         margin: 0 auto;
       }
       #demo {
-        margin-top: 3rem;
+        margin-top: 2rem;
       }
-      #recordFull, #recordParts, #pause, #resume, #stop {
+      #recordFull, #recordParts, #pause, #resume, #stop, #request {
         vertical-align: bottom;
         font-size: 150%;
         height: 2.5rem;
@@ -31,12 +31,17 @@
       }
       #support {
         display: none;
-        margin-top: 3rem;
+        margin-top: 2rem;
         color: red;
         font-weight: bold;
       }
       #list {
         margin-top: 2rem;
+      }
+      audio {
+        vertical-align: middle;
+        width: 5rem;
+        margin-right: 0.5rem;
       }
       li {
         list-style: none;
@@ -56,6 +61,7 @@
         <button id="pause" disabled>⏸</button>
         <button id="resume" disabled>▶</button>
         <button id="stop" disabled>⏹</button>
+        <button id="request" disabled>▼</button>
       </div>
       <div id="support">
         Your browser doesn’t support MediaRecorder

@@ -1,12 +1,15 @@
+var bytes = require('bytes')
+
 var EVENTS = ['start', 'stop', 'pause', 'resume']
 
-var recorder, recordFull, recordParts, pause, resume, stop, list
+var recorder, list, recordFull, recordParts, pause, resume, stop, request
 
 window.onload = function () {
   list = document.getElementById('list')
 
   recordParts = document.getElementById('recordParts')
   recordFull = document.getElementById('recordFull')
+  request = document.getElementById('request')
   resume = document.getElementById('resume')
   pause = document.getElementById('pause')
   stop = document.getElementById('stop')
@@ -19,6 +22,7 @@ window.onload = function () {
 
   recordParts.addEventListener('click', startRecording)
   recordFull.addEventListener('click', startRecording)
+  request.addEventListener('click', requestData)
   resume.addEventListener('click', resumeRecording)
   pause.addEventListener('click', pauseRecording)
   stop.addEventListener('click', stopRecording)
@@ -28,6 +32,7 @@ window.onload = function () {
 }
 
 function startRecording (e) {
+  list.innerHTML = ''
   navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
     recorder = new MediaRecorder(stream)
 
@@ -59,6 +64,10 @@ function resumeRecording () {
   recorder.resume()
 }
 
+function requestData () {
+  recorder.requestData()
+}
+
 function saveRecord (e) {
   var li = document.createElement('li')
 
@@ -67,29 +76,39 @@ function saveRecord (e) {
   audio.src = URL.createObjectURL(e.data)
   li.appendChild(audio)
 
+  var s = document.createElement('span')
+  s.innerText = e.data.type + ', ' + bytes(e.data.size, { unitSeparator: ' ' })
+  li.appendChild(s)
+
   list.appendChild(li)
 }
 
 function changeState (eventName) {
   var li = document.createElement('li')
   li.innerHTML = '<strong>' + eventName + ':</strong> ' + recorder.state
+  if (eventName === 'start') {
+    li.innerHTML += ', ' + recorder.mimeType
+  }
   list.appendChild(li)
 
   if (recorder.state === 'recording') {
     recordParts.disabled = true
     recordFull.disabled = true
+    request.disabled = false
     resume.disabled = false
     pause.disabled = false
     stop.disabled = false
   } else if (recorder.state === 'paused') {
     recordParts.disabled = false
     recordFull.disabled = false
+    request.disabled = false
     resume.disabled = false
     pause.disabled = true
     stop.disabled = false
   } else if (recorder.state === 'inactive') {
     recordParts.disabled = false
     recordFull.disabled = false
+    request.disabled = true
     resume.disabled = true
     pause.disabled = true
     stop.disabled = true
