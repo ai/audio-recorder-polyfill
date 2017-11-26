@@ -28,6 +28,11 @@ MediaRecorder.prototype = {
    * @param {function} listener The listener function.
    *
    * @return {undefined}
+   *
+   * @example
+   * recorder.addEventListener('dataavailable', function (e) {
+   *   audio.src = URL.createObjectURL(e.data)
+   * })
    */
   addEventListener: function addEventListener () {
     this.em.addEventListener.apply(this.em, arguments)
