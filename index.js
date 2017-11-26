@@ -200,7 +200,7 @@ MediaRecorder.isTypeSupported = function isTypeSupported (mimeType) {
  * @type {boolean}
  *
  * @example
- * if (!window.MediaRecorder || MediaRecorder.notSupported) {
+ * if (MediaRecorder.notSupported) {
  *   showWarning('Audio recording is not supported in this browser')
  * }
  */
