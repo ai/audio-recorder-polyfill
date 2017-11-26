@@ -56,6 +56,8 @@ function startRecording (e) {
       recorder.start(1000)
     }
   })
+  recordParts.blur()
+  recordFull.blur()
 }
 
 function stopRecording () {
@@ -63,18 +65,22 @@ function stopRecording () {
   recorder.stream.getTracks().forEach(function (track) {
     track.stop()
   })
+  stop.blur()
 }
 
 function pauseRecording () {
   recorder.pause()
+  pause.blur()
 }
 
 function resumeRecording () {
   recorder.resume()
+  resume.blur()
 }
 
 function requestData () {
   recorder.requestData()
+  request.blur()
 }
 
 function saveRecord (e) {
@@ -104,7 +110,7 @@ function changeState (eventName) {
     recordParts.disabled = true
     recordFull.disabled = true
     request.disabled = false
-    resume.disabled = false
+    resume.disabled = true
     pause.disabled = false
     stop.disabled = false
   } else if (recorder.state === 'paused') {

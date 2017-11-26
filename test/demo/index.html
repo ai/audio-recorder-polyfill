@@ -25,15 +25,46 @@
         display: flex;
         margin-top: 2rem;
       }
-      #recordFull, #recordParts, #pause, #resume, #stop, #request {
+      button {
+        position: relative;
         flex-grow: 1;
         height: 2.5rem;
-        vertical-align: bottom;
-        font-size: 150%;
+        line-height: 3rem;
+        font-size: 300%;
+        border: none;
+        border-radius: 3px;
+        background: lightgray;
+        overflow: hidden;
+        margin: 0 1px;
       }
-      #recordParts span {
-        vertical-align: 38%;
-        font-size: 50%;
+      button:hover, button:focus {
+        outline: none;
+        background: #999;
+      }
+      button::-moz-focus-inner {
+        border: 0;
+      }
+      button:active {
+        transform: scale(0.9);
+      }
+      button:disabled {
+        pointer-events: none;
+        color: gray;
+      }
+      button span {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 20%;
+        line-height: 2.5rem;
+      }
+      #recordFull {
+        margin-left: 0;
+      }
+      #request {
+        margin-right: 0;
       }
       #formats, #mode {
         margin-top: 0.5rem;
@@ -69,12 +100,12 @@
         is a MediaRecorder polyfill to record audio in Edge and Safari.
       </p>
       <div id="controls">
-        <button id="recordFull" disabled title="Record">⏺</button>
-        <button id="recordParts" disabled title="Record by 1 second">⏺<span>1s<span></button>
-        <button id="pause" disabled title="Pause">⏸</button>
-        <button id="resume" disabled title="Resume">▶</button>
-        <button id="stop" disabled title="Stop">⏹</button>
-        <button id="request" disabled title="Dump data">▼</button>
+        <button id="recordFull" disabled autocomplete="off" title="Record">⏺</button>
+        <button id="recordParts" disabled autocomplete="off" title="Record by 1 second">⏺<span>1s<span></button>
+        <button id="pause" disabled autocomplete="off" title="Pause">⏸</button>
+        <button id="resume" disabled autocomplete="off" title="Resume">⏵</button>
+        <button id="stop" autocomplete="off" disabled title="Stop">⏹</button>
+        <button id="request" autocomplete="off" disabled title="Dump data">⏷</button>
       </div>
       <div id="mode">
         Native support, <a href="?polyfill">force polyfill</a>
