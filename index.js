@@ -16,9 +16,46 @@ function MediaRecorder (stream) {
    * @type {MediaStream}
    */
   this.stream = stream
+
+  this.em = document.createDocumentFragment()
 }
 
-MediaRecorder.prototype = { }
+MediaRecorder.prototype = {
+  /**
+   * Add listener for specified event type.
+   *
+   * @param {"start"|"stop"|"pause"|"resume"|"dataavailable"} type Event type.
+   * @param {function} listener The listener function.
+   *
+   * @return {undefined}
+   */
+  addEventListener: function addEventListener () {
+    this.em.addEventListener.apply(this.em, arguments)
+  },
+
+  /**
+   * Remove event listener.
+   *
+   * @param {"start"|"stop"|"pause"|"resume"|"dataavailable"} type Event type.
+   * @param {function} listener The same function used in `addEventListener`.
+   *
+   * @return {undefined}
+   */
+  removeEventListener: function removeEventListener () {
+    this.em.removeEventListener.apply(this.em, arguments)
+  },
+
+  /**
+   * Calls each of the listeners registered for a given event.
+   *
+   * @param {Event} event The event object.
+   *
+   * @return {boolean} Is event was no canceled by any listener.
+   */
+  dispatchEvent: function dispatchEvent () {
+    this.em.dispatchEvent.apply(this.em, arguments)
+  }
+}
 
 /**
  * Returns `true` if the MIME type specified is one the polyfill can record.

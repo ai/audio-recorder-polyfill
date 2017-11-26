@@ -13,6 +13,10 @@
     "js",
     "isTypeSupported",
     "mimeType",
-    "MediaStream"
+    "MediaStream",
+    "dataavailable",
+    "addEventListener",
+    "dispatchEvent",
+    "removeEventListener"
   ]
 }
