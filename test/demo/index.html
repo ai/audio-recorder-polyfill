@@ -35,7 +35,7 @@
         border-radius: 3px;
         background: lightgray;
         overflow: hidden;
-        margin: 0 1px;
+        margin-left: 2px;
       }
       button:hover, button:focus {
         outline: none;
@@ -51,6 +51,9 @@
         pointer-events: none;
         color: gray;
       }
+      button:first-child {
+        margin-left: 0;
+      }
       button span {
         position: absolute;
         top: 0;
@@ -59,12 +62,6 @@
         color: white;
         font-size: 20%;
         line-height: 2.5rem;
-      }
-      #recordFull {
-        margin-left: 0;
-      }
-      #request {
-        margin-right: 0;
       }
       #formats, #mode {
         margin-top: 0.5rem;
