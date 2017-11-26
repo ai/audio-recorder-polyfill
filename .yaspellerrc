@@ -9,6 +9,9 @@
     "docdash",
     "MediaRecorder",
     "Versioning",
-    "polyfill"
+    "polyfill",
+    "js",
+    "isTypeSupported",
+    "mimeType"
   ]
 }

@@ -27,6 +27,7 @@
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^3.0.1",
     "html-webpack-plugin": "^2.30.1",
+    "jest": "^21.2.1",
     "jsdoc": "^3.5.5",
     "lint-staged": "^5.0.0",
     "pre-commit": "^1.2.2",
@@ -42,9 +43,9 @@
     "clean": "rimraf docs/",
     "lint": "eslint *.js test/{**/,}*.js",
     "docs": "jsdoc --configure .jsdocrc *.js",
-    "test": "yarn lint && size-limit && yarn spellcheck && yarn build",
-    "demo": "webpack-dev-server --config test/webpack.config",
-    "build": "webpack --config test/webpack.config -p"
+    "test": "jest && yarn lint && size-limit && yarn spellcheck && yarn build",
+    "demo": "webpack-dev-server --config test/demo/webpack.config",
+    "build": "webpack --config test/demo/webpack.config -p"
   },
   "eslintConfig": {
     "extends": "eslint-config-logux/browser"
@@ -52,7 +53,7 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "0 B"
+      "limit": "46 B"
     }
   ],
   "lint-staged": {
