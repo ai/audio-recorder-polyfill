@@ -108,8 +108,8 @@ function changeState (eventName) {
     pause.disabled = false
     stop.disabled = false
   } else if (recorder.state === 'paused') {
-    recordParts.disabled = false
-    recordFull.disabled = false
+    recordParts.disabled = true
+    recordFull.disabled = true
     request.disabled = false
     resume.disabled = false
     pause.disabled = true
