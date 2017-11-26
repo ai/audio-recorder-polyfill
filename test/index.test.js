@@ -1,3 +1,5 @@
+var delay = require('nanodelay')
+
 var MediaRecorder = require('../')
 
 function AudioContext () { }
@@ -109,4 +111,52 @@ it('supports webkit prefix', function () {
   delete window.AudioContext
   window.webkitAudioContext = AudioContext
   new MediaRecorder()
+})
+
+it('allow to request captured data', function () {
+  var recorder = new MediaRecorder()
+  var events = listen(recorder)
+
+  recorder.requestData()
+  expect(events).toEqual([])
+
+  recorder.start()
+  recorder.requestData()
+  expect(events).toEqual(['start', 'dataavailable'])
+})
+
+it('supports slicing in start method', function () {
+  var recorder = new MediaRecorder()
+  var calls = 0
+  recorder.addEventListener('dataavailable', function (e) {
+    expect(e.data).toBeInstanceOf(Blob)
+    expect(e.data.type).toEqual('audio/wav')
+    calls += 1
+  })
+
+  recorder.start(500)
+  return delay(10).then(function () {
+    expect(calls).toEqual(0)
+    return delay(500)
+  }).then(function () {
+    expect(calls).toEqual(1)
+    return delay(510)
+  }).then(function () {
+    expect(calls).toEqual(2)
+    recorder.pause()
+    return delay(510)
+  }).then(function () {
+    expect(calls).toEqual(2)
+    return delay(250)
+  }).then(function () {
+    recorder.resume()
+    return delay(250)
+  }).then(function () {
+    expect(calls).toEqual(3)
+    recorder.stop()
+    expect(calls).toEqual(4)
+    return delay(510)
+  }).then(function () {
+    expect(calls).toEqual(4)
+  })
 })

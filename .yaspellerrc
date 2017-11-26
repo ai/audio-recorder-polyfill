@@ -19,6 +19,7 @@
     "dispatchEvent",
     "removeEventListener",
     "timeslice",
-    "notSupported"
+    "notSupported",
+    "requestData"
   ]
 }

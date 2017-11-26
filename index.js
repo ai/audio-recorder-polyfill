@@ -55,9 +55,15 @@ MediaRecorder.prototype = {
    */
   start: function start (timeslice) {
     if (this.state === 'inactive') {
-      this.timeslice = timeslice
       this.state = 'recording'
       this.em.dispatchEvent(new Event('start'))
+
+      if (timeslice) {
+        var recorder = this
+        this.slicing = setInterval(function () {
+          if (recorder.state === 'recording') recorder.requestData()
+        }, timeslice)
+      }
     }
   },
 
@@ -73,9 +79,10 @@ MediaRecorder.prototype = {
    */
   stop: function stop () {
     if (this.state !== 'inactive') {
+      this.requestData()
       this.state = 'inactive'
-      this.em.dispatchEvent(new Event('dataavailable'))
       this.em.dispatchEvent(new Event('stop'))
+      clearInterval(this.slicing)
     }
   },
 
@@ -110,6 +117,24 @@ MediaRecorder.prototype = {
     if (this.state === 'paused') {
       this.state = 'recording'
       this.em.dispatchEvent(new Event('resume'))
+    }
+  },
+
+  /**
+   * Raise a `dataavailable` event containing the captured media.
+   *
+   * @return {undefined}
+   *
+   * @example
+   * this.on('nextData', function () {
+   *   recorder.requestData()
+   * })
+   */
+  requestData: function requestData () {
+    if (this.state !== 'inactive') {
+      var event = new Event('dataavailable')
+      event.data = new Blob([], { type: this.mimeType })
+      this.em.dispatchEvent(event)
     }
   },
 
