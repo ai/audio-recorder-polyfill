@@ -46,7 +46,7 @@
     "docs": "jsdoc --configure .jsdocrc *.js",
     "unit": "jest --coverage",
     "test": "yarn unit && yarn lint && size-limit && yarn spell && yarn build",
-    "demo": "webpack-dev-server --config test/demo/webpack.config",
+    "start": "webpack-dev-server --config test/demo/webpack.config",
     "build": "webpack --config test/demo/webpack.config -p"
   },
   "jest": {
