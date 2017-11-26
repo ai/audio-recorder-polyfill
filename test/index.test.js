@@ -1,5 +1,16 @@
 var MediaRecorder = require('../')
 
+function listen (recorder) {
+  var events = []
+  var names = ['start', 'stop', 'pause', 'resume', 'dataavailable']
+  names.forEach(function (i) {
+    recorder.addEventListener(i, function () {
+      events.push(i)
+    })
+  })
+  return events
+}
+
 it('checks audio format support', function () {
   expect(MediaRecorder.isTypeSupported('audio/wav')).toBeTruthy()
   expect(MediaRecorder.isTypeSupported('audio/wave')).toBeTruthy()
@@ -10,11 +21,6 @@ it('saves stream', function () {
   var stream = { }
   var recorder = new MediaRecorder(stream)
   expect(recorder.stream).toBe(stream)
-})
-
-it('has initial state', function () {
-  var recorder = new MediaRecorder()
-  expect(recorder.state).toBe('inactive')
 })
 
 it('saves event listeners', function () {
@@ -29,4 +35,50 @@ it('saves event listeners', function () {
   recorder.removeEventListener('stop', cb)
   recorder.dispatchEvent(event)
   expect(cb).toHaveBeenCalledTimes(1)
+})
+
+it('has state and state events', function () {
+  var recorder = new MediaRecorder()
+  var events = listen(recorder)
+  expect(recorder.state).toEqual('inactive')
+
+  recorder.start()
+  expect(recorder.state).toEqual('recording')
+
+  recorder.pause()
+  expect(recorder.state).toEqual('paused')
+
+  recorder.resume()
+  expect(recorder.state).toEqual('recording')
+
+  recorder.stop()
+  expect(recorder.state).toEqual('inactive')
+
+  expect(events).toEqual(['start', 'pause', 'resume', 'dataavailable', 'stop'])
+})
+
+it('ignores command in wrong state', function () {
+  var recorder = new MediaRecorder()
+  var events = listen(recorder)
+
+  recorder.stop()
+  recorder.pause()
+  recorder.resume()
+  expect(recorder.state).toEqual('inactive')
+  expect(events).toEqual([])
+
+  recorder.start()
+  recorder.resume()
+  expect(recorder.state).toEqual('recording')
+  expect(events).toEqual(['start'])
+})
+
+it('allows to stop paused recording', function () {
+  var recorder = new MediaRecorder()
+  var events = listen(recorder)
+  recorder.start()
+  recorder.pause()
+  recorder.stop()
+  expect(recorder.state).toEqual('inactive')
+  expect(events).toEqual(['start', 'pause', 'dataavailable', 'stop'])
 })

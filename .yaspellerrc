@@ -17,6 +17,7 @@
     "dataavailable",
     "addEventListener",
     "dispatchEvent",
-    "removeEventListener"
+    "removeEventListener",
+    "timeslice"
   ]
 }

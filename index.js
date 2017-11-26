@@ -28,6 +28,80 @@ function MediaRecorder (stream) {
 
 MediaRecorder.prototype = {
   /**
+   * Begins recording media.
+   *
+   * @param {number} [timeslice] The milliseconds to record into each `Blob`.
+   *                             If this parameter isn’t included, single `Blob`
+   *                             will be recorded.
+   *
+   * @return {undefined}
+   *
+   * @example
+   * recordButton.addEventListener('click', function () {
+   *   recorder.start()
+   * })
+   */
+  start: function start (timeslice) {
+    if (this.state === 'inactive') {
+      this.timeslice = timeslice
+      this.state = 'recording'
+      this.em.dispatchEvent(new Event('start'))
+    }
+  },
+
+  /**
+   * Stop media capture and raise `dataavailable` event with recorded data.
+   *
+   * @return {undefined}
+   *
+   * @example
+   * finishButton.addEventListener('click', function () {
+   *   recorder.stop()
+   * })
+   */
+  stop: function stop () {
+    if (this.state !== 'inactive') {
+      this.state = 'inactive'
+      this.em.dispatchEvent(new Event('dataavailable'))
+      this.em.dispatchEvent(new Event('stop'))
+    }
+  },
+
+  /**
+   * Pauses recording of media streams.
+   *
+   * @return {undefined}
+   *
+   * @example
+   * pauseButton.addEventListener('click', function () {
+   *   recorder.pause()
+   * })
+   */
+  pause: function pause () {
+    if (this.state === 'recording') {
+      this.state = 'paused'
+      this.em.dispatchEvent(new Event('pause'))
+    }
+  },
+
+  /**
+   * Resumes media recording when it has been previously paused.
+   *
+   * @return {undefined}
+   *
+   * @example
+   * resumeButton.addEventListener('click', function () {
+   *   recorder.resume()
+   * })
+   */
+  resume: function resume () {
+    if (this.state === 'paused') {
+      this.state = 'recording'
+      this.em.dispatchEvent(new Event('resume'))
+    }
+  },
+
+  /**
    * Add listener for specified event type.
    *
    * @param {"start"|"stop"|"pause"|"resume"|"dataavailable"} type Event type.
