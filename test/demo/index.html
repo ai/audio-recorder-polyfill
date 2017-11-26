@@ -29,23 +29,25 @@
         position: relative;
         flex-grow: 1;
         height: 2.5rem;
-        line-height: 3rem;
+        line-height: 2.9rem;
         font-size: 300%;
         border: none;
         border-radius: 3px;
         background: lightgray;
         overflow: hidden;
         margin-left: 2px;
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
       }
       button:hover, button:focus {
         outline: none;
-        background: #999;
+        background: #aaa;
       }
       button::-moz-focus-inner {
         border: 0;
       }
       button:active {
-        transform: scale(0.9);
+        box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2);
+        line-height: 3rem;
       }
       button:disabled {
         pointer-events: none;
@@ -61,6 +63,9 @@
         transform: translateX(-50%);
         color: white;
         font-size: 20%;
+        line-height: 2.4rem;
+      }
+      button:active span {
         line-height: 2.5rem;
       }
       #formats, #mode {
