@@ -143,6 +143,20 @@ recorder.addEventListener('dataavailable', e => {
 })
 ```
 
+## Limits
+
+This polyfill tries to be `MediaRecorder` API compatible.
+But it still has small differences.
+
+* WAV format contains duration in the file header. As result, with `timeslice`
+  or `requestData()` call, `dataavailable` will receive a separated file
+  with header on every call. In contrast, MediaRecorder sends header only
+  to first `dataavailable`. Other events receive addition bytes
+  to the same file.
+* Constructor options are not supported.
+* Polyfill ignores method call in the wrong state (like `stop()`
+  during `inactive` state) instead of throwing an error.
+
 ## Custom Encoder
 
 If you need audio format with better compression,
