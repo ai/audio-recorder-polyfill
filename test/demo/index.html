@@ -41,7 +41,7 @@
         border: none;
         border-radius: 0.15rem;
         background: #00e5d2;
-        margin-left: 0.1rem;
+        margin-left: 2px;
         box-shadow: inset 0 -0.15rem 0 rgba(0, 0, 0, 0.2);
         cursor: pointer;
         display: flex;
@@ -69,7 +69,7 @@
       button svg {
         transform: translateY(-0.05rem);
         fill: black;
-        width: 1.2rem;
+        width: 1.4rem;
       }
       button:active svg {
         transform: translateY(0);
@@ -123,34 +123,34 @@
       <div id="controls">
         <button id="record" disabled autocomplete="off" title="Record">
           <svg viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="50" />
+            <circle cx="50" cy="50" r="46" />
           <svg>
         </button>
         <button id="sec" disabled autocomplete="off" title="Record by 1 second">
           <svg viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="50" />
-            <text x="24" y="64" font-size="47">1s</text>
+            <circle cx="50" cy="50" r="46" />
+            <text x="26" y="64" font-size="45">1s</text>
           <svg>
         </button>
         <button id="pause" disabled autocomplete="off" title="Pause">
           <svg viewBox="0 0 100 100">
-            <rect x="14" y="0" width="25" height="100" />
-            <rect x="62" y="0" width="25" height="100" />
+            <rect x="14" y="10" width="25" height="80" />
+            <rect x="62" y="10" width="25" height="80" />
           <svg>
         </button>
         <button id="resume" disabled autocomplete="off" title="Resume">
           <svg viewBox="0 0 100 100">
-            <polygon points="5,5 95,50 5,95" />
+            <polygon points="10,10 90,50 10,90" />
           <svg>
         </button>
         <button id="stop" autocomplete="off" disabled title="Stop">
           <svg viewBox="0 0 100 100">
-            <rect x="0" y="0" width="100" height="100"></rect>
+            <rect x="12" y="12" width="76" height="76"></rect>
           <svg>
         </button>
         <button id="request" autocomplete="off" disabled title="Request data">
           <svg viewBox="0 0 100 100">
-            <polygon points="5,5 95,5 50,95" />
+            <polygon points="10,10 90,10 50,90" />
           <svg>
         </button>
       </div>
