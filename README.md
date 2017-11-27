@@ -2,7 +2,7 @@
 
 [MediaRecorder] polyfill to record audio in Edge and Safari 11.
 It uses Web Audio API and WAV encoder in Web Worker.
-Try it in **[online demo].**
+Try it in **[online demo].**
 
 * **Spec compatible.** In the future when other browsers will support
   `MediaRecorder` too, you will be able to remove polyfill.
@@ -29,3 +29,40 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
   <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
        alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
+
+## Install
+
+Install package:
+
+```sh
+npm install --save audio-recorder-polyfill
+```
+
+We recommend to create separated webpack bundle with polyfill. In this case
+polyfill will be downloaded only by Edge and Safari. Good browsers will
+save bytes.
+
+```diff
+  entry: {
+    app: './src/app.js',
++   polyfill: './src/polyfill.js'
+  }
+```
+
+Install polyfill as `MediaRecorder` in this new bundle `src/polyfill.js`:
+
+```js
+window.MediaRecorder = require('audio-recorder-polyfill')
+```
+
+Add this code to your HTML to load this new bundle only for browsers
+without `MediaRecorder` support:
+
+```diff
++   <script>
++     if (!window.MediaRecorder) {
++       document.write(unescape('%3Cscript src="/polyfill.js">%3C/script>'))
++     }
++   </script>
+    <script src="/app.js" defer></script>
+```
