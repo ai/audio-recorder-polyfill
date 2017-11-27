@@ -164,8 +164,8 @@ you can change polyfill’s encoder:
 + MediaRecorder.mimeType = 'audio/ogg'
 ```
 
-The encoder should be a function with Web Worker in the body. Polyfill will
-convert function to the string to make Web Worker.
+The encoder should be a function with Web Worker in the body.
+Polyfill converts function to the string to make Web Worker.
 
 ```js
 module.exports = function () {
