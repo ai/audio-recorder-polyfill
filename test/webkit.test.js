@@ -1,13 +1,6 @@
-navigator.mediaDevices = { }
-function AudioContext () { }
-AudioContext.prototype = {
-  createGain: function () {
-    return { gain: { value: 1 } }
-  },
-  createScriptProcessor: function () { }
-}
-global.webkitAudioContext = AudioContext
-
+require('./browser.js')
+global.webkitAudioContext = global.AudioContext
+delete global.AudioContext
 var MediaRecorder = require('../')
 
 it('detects support', function () {
@@ -15,5 +8,6 @@ it('detects support', function () {
 })
 
 it('uses audio context with prefix', function () {
-  new MediaRecorder()
+  var recorder = new MediaRecorder()
+  recorder.start()
 })

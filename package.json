@@ -57,12 +57,15 @@
     }
   },
   "eslintConfig": {
-    "extends": "eslint-config-logux/browser"
+    "extends": "eslint-config-logux/browser",
+    "globals": {
+      "onmessage": true
+    }
   },
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "503 B"
+      "limit": "1013 B"
     }
   ],
   "lint-staged": {

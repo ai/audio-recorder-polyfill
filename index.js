@@ -1,5 +1,14 @@
 var AudioContext = window.AudioContext || window.webkitAudioContext
 
+function createWorker (fn) {
+  var js = fn
+    .toString()
+    .replace(/^function\s*\(\)\s*{/, '')
+    .replace(/}$/, '')
+  var blob = new Blob([js])
+  return new Worker(URL.createObjectURL(blob))
+}
+
 /**
  * Audio Recorder with MediaRecorder API.
  *
@@ -26,11 +35,17 @@ function MediaRecorder (stream) {
   this.state = 'inactive'
 
   this.em = document.createDocumentFragment()
+  this.encoder = createWorker(MediaRecorder.encoder)
 
-  this.context = new AudioContext()
-  this.monitor = this.context.createGain()
-  this.processor = this.context.createScriptProcessor(4096, 1, 1)
-  this.monitor.gain.value = 0
+  var recorder = this
+  this.encoder.addEventListener('message', function (e) {
+    var event = new Event('dataavailable')
+    event.data = new Blob([e.data], { type: recorder.mimeType })
+    recorder.em.dispatchEvent(event)
+    if (recorder.state === 'inactive') {
+      recorder.em.dispatchEvent(new Event('stop'))
+    }
+  })
 }
 
 MediaRecorder.prototype = {
@@ -57,12 +72,26 @@ MediaRecorder.prototype = {
   start: function start (timeslice) {
     if (this.state === 'inactive') {
       this.state = 'recording'
-      this.monitor.connect(this.context.destination)
-      this.processor.connect(this.context.destination)
+
+      this.context = new AudioContext()
+      var input = this.context.createMediaStreamSource(this.stream)
+      var processor = this.context.createScriptProcessor(2048, 1, 1)
+
+      var recorder = this
+      processor.onaudioprocess = function (e) {
+        if (recorder.state === 'recording') {
+          recorder.encoder.postMessage([
+            'encode', e.inputBuffer.getChannelData(0)
+          ])
+        }
+      }
+
+      input.connect(processor)
+      processor.connect(this.context.destination)
+
       this.em.dispatchEvent(new Event('start'))
 
       if (timeslice) {
-        var recorder = this
         this.slicing = setInterval(function () {
           if (recorder.state === 'recording') recorder.requestData()
         }, timeslice)
@@ -84,7 +113,6 @@ MediaRecorder.prototype = {
     if (this.state !== 'inactive') {
       this.requestData()
       this.state = 'inactive'
-      this.em.dispatchEvent(new Event('stop'))
       clearInterval(this.slicing)
     }
   },
@@ -135,9 +163,7 @@ MediaRecorder.prototype = {
    */
   requestData: function requestData () {
     if (this.state !== 'inactive') {
-      var event = new Event('dataavailable')
-      event.data = new Blob([], { type: this.mimeType })
-      this.em.dispatchEvent(event)
+      this.encoder.postMessage(['dump', this.context.sampleRate])
     }
   },
 
@@ -205,5 +231,17 @@ MediaRecorder.isTypeSupported = function isTypeSupported (mimeType) {
  * }
  */
 MediaRecorder.notSupported = !navigator.mediaDevices || !AudioContext
+
+/**
+ * Converts RAW audio buffer to compressed audio files.
+ * It will be loaded to Web Worker.
+ * By default, WAVE encoder will be used.
+ * @type {function}
+ *
+ * @example
+ * MediaRecorder.prototype.mimeType = 'audio/ogg'
+ * MediaRecorder.encoder = oggEncoder
+ */
+MediaRecorder.encoder = require('./wave-encoder')
 
 module.exports = MediaRecorder
