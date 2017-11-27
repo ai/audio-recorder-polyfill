@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
       return MediaRecorder.isTypeSupported(i)
     }).join(', ')
 
-  recordParts.addEventListener('click', startRecording)
-  recordFull.addEventListener('click', startRecording)
+  recordParts.addEventListener('click', startRecording.bind(null, 'parts'))
+  recordFull.addEventListener('click', startRecording.bind(null, 'full'))
   request.addEventListener('click', requestData)
   resume.addEventListener('click', resumeRecording)
   pause.addEventListener('click', pauseRecording)
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
   recordFull.disabled = false
 })
 
-function startRecording (e) {
+function startRecording (type) {
   list.innerHTML = ''
   navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
     recorder = new MediaRecorder(stream)
@@ -50,7 +50,7 @@ function startRecording (e) {
     })
     recorder.addEventListener('dataavailable', saveRecord)
 
-    if (e.target === recordFull) {
+    if (type === 'full') {
       recorder.start()
     } else {
       recorder.start(1000)
