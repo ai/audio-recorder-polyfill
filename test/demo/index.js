@@ -90,15 +90,15 @@ function saveRecord (e) {
   strong.innerText = 'dataavailable: '
   li.appendChild(strong)
 
-  var audio = document.createElement('audio')
-  audio.controls = true
-  audio.src = URL.createObjectURL(e.data)
-  li.appendChild(audio)
-
   var s = document.createElement('span')
   s.innerText = e.data.type + ', ' +
     bytes(e.data.size, { unitSeparator: ' ', decimalPlaces: 0 })
   li.appendChild(s)
+
+  var audio = document.createElement('audio')
+  audio.controls = true
+  audio.src = URL.createObjectURL(e.data)
+  li.appendChild(audio)
 
   list.appendChild(li)
 }

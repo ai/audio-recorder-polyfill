@@ -28,26 +28,25 @@
       article {
         max-width: 28rem;
         margin: 0 auto;
+        position: relative;
       }
       #controls {
         display: flex;
         margin-top: 2rem;
       }
       button {
-        position: relative;
         flex-grow: 1;
         height: 2.5rem;
-        line-height: 2.9rem;
-        font-size: 300%;
+        min-width: 2rem;
         border: none;
-        border-radius: 3px;
-        color: black;
+        border-radius: 0.15rem;
         background: #00e5d2;
-        overflow: hidden;
-        margin-left: 2px;
-        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+        margin-left: 0.1rem;
+        box-shadow: inset 0 -0.15rem 0 rgba(0, 0, 0, 0.2);
         cursor: pointer;
-        -webkit-appearance: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       button:hover, button:focus {
         outline: none;
@@ -62,23 +61,30 @@
       }
       button:disabled {
         pointer-events: none;
-        color: #9a9a9a;
         background: lightgray;
       }
       button:first-child {
         margin-left: 0;
       }
-      button span {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        color: white;
-        font-size: 20%;
-        line-height: 2.4rem;
+      button svg {
+        transform: translateY(-0.05rem);
+        fill: black;
+        width: 1.2rem;
       }
-      button:active span {
-        line-height: 2.5rem;
+      button:active svg {
+        transform: translateY(0);
+      }
+      button:disabled svg {
+        fill: #9a9a9a;
+      }
+      button text {
+        fill: #00e5d2;
+      }
+      button:hover text, button:focus text {
+        fill: #00ffe9;
+      }
+      button:disabled text {
+        fill: lightgray;
       }
       #formats, #mode {
         margin-top: 0.5rem;
@@ -97,14 +103,13 @@
         margin-top: 1.6rem;
       }
       audio {
-        width: 5.1rem;
-        margin-right: 0.5rem;
-        vertical-align: middle;
+        display: block;
+        width: 100%;
+        margin-top: 0.2rem;
       }
       li {
-        min-height: 2.5rem;
-        line-height: 2.5rem;
         list-style: none;
+        margin-bottom: 1rem;
       }
     </style>
   </head>
@@ -117,22 +122,36 @@
       </p>
       <div id="controls">
         <button id="record" disabled autocomplete="off" title="Record">
-          ⏺
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50" />
+          <svg>
         </button>
         <button id="sec" disabled autocomplete="off" title="Record by 1 second">
-          ⏺<span>1s<span>
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50" />
+            <text x="24" y="64" font-size="47">1s</text>
+          <svg>
         </button>
         <button id="pause" disabled autocomplete="off" title="Pause">
-          ⏸
+          <svg viewBox="0 0 100 100">
+            <rect x="14" y="0" width="25" height="100" />
+            <rect x="62" y="0" width="25" height="100" />
+          <svg>
         </button>
         <button id="resume" disabled autocomplete="off" title="Resume">
-          ⏵
+          <svg viewBox="0 0 100 100">
+            <polygon points="5,5 95,50 5,95" />
+          <svg>
         </button>
         <button id="stop" autocomplete="off" disabled title="Stop">
-          ⏹
+          <svg viewBox="0 0 100 100">
+            <rect x="0" y="0" width="100" height="100"></rect>
+          <svg>
         </button>
-        <button id="request" autocomplete="off" disabled title="Dump data">
-          ⏷
+        <button id="request" autocomplete="off" disabled title="Request data">
+          <svg viewBox="0 0 100 100">
+            <polygon points="5,5 95,5 50,95" />
+          <svg>
         </button>
       </div>
       <div id="mode">
