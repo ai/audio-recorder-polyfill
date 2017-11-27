@@ -26,6 +26,7 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^3.0.1",
+    "html-webpack-inline-source-plugin": "^0.0.9",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^21.2.1",
     "jsdoc": "^3.5.5",
@@ -34,6 +35,7 @@
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
     "size-limit": "^0.13.2",
+    "uglifyjs-webpack-plugin": "^1.1.1",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4",
     "yaspeller-ci": "^1.0.0"
