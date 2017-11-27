@@ -115,12 +115,65 @@ If you need to upload audio to the servers, we recommend to use `timeslice`.
 So you will start to upload audio before recording would finished.
 
 ```js
-    // Will be executed every second with next part of audio file
-    recorder.addEventListener('dataavailable', e => {
-      sendNextPiece(e.data)
-    })
-    // Dump audio data every second
-    recorder.start(1000)
+// Will be executed every second with next part of audio file
+recorder.addEventListener('dataavailable', e => {
+  sendNextPiece(e.data)
+})
+// Dump audio data every second
+recorder.start(1000)
 ```
 
 [`MediaRecorder` API]: https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
+
+## Audio Formats
+
+Main problem with audio recording is different audio formats in browsers.
+Chrome records natively only to `.webm` files. Firefox to `.ogg`.
+
+This polyfill saves records to `.wav` files. Compression in this format
+is not very good, but encoding is fast and simple.
+
+You can get used file format in `e.data.type`:
+
+```js
+recorder.addEventListener('dataavailable', e => {
+  e.data.type //=> 'audio/wav' with polyfill
+              //   'audio/webm' in Chrome
+              //   'audio/ogg' in Firefox
+})
+```
+
+## Custom Encoder
+
+If you need audio format with better compression,
+you can change polyfill’s encoder:
+
+```diff
+  window.MediaRecorder = require('audio-recorder-polyfill')
++ MediaRecorder.encoder = require('./ogg-opus-encoder')
++ MediaRecorder.mimeType = 'audio/ogg'
+```
+
+Encoder should be a function with Web Worker in the body. Polyfill will
+convert function to the string and will make Web Worker from it.
+
+```js
+module.exports = function () {
+  function encode (input) {
+    …
+  }
+
+  function dump (sampleRate) {
+    …
+    postMessage(output)
+  }
+
+  onmessage = function (e) {
+    if (e.data[0] === 'encode') {
+      encode(e.data[1])
+    } else {
+      dump(e.data[1])
+    }
+  }
+}
+```
