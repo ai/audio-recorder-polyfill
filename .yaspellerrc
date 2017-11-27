@@ -20,6 +20,8 @@
     "removeEventListener",
     "timeslice",
     "notSupported",
-    "requestData"
+    "requestData",
+    "KB",
+    "gzipped"
   ]
 }
