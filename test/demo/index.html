@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Media Recorder Polyfill</title>
+    <meta content="width=device-width" name="viewport">
+    <meta name="theme-color" content="#00e5d2">
     <script>
       if (!window.MediaRecorder || /^\?polyfill/.test(location.search)) {
         document.write(unescape('%3Cscript src="/polyfill.js">%3C/script>'))
@@ -20,7 +22,7 @@
         color: #930087;
       }
       body {
-        margin: 2rem;
+        margin: 1rem;
         font-family: sans-serif;
       }
       article {
@@ -107,16 +109,29 @@
   <body>
     <article>
       <p>
-        <a href="https://github.com/ai/audio-recorder-polyfill">Audio Recorder Polyfill</a>
-        is a MediaRecorder polyfill to record audio in Edge and Safari.
+        <a href="https://github.com/ai/audio-recorder-polyfill">Audio
+        Recorder Polyfill</a> is a MediaRecorder polyfill to record audio
+        in Edge and Safari.
       </p>
       <div id="controls">
-        <button id="recordFull" disabled autocomplete="off" title="Record">⏺</button>
-        <button id="recordParts" disabled autocomplete="off" title="Record by 1 second">⏺<span>1s<span></button>
-        <button id="pause" disabled autocomplete="off" title="Pause">⏸</button>
-        <button id="resume" disabled autocomplete="off" title="Resume">⏵</button>
-        <button id="stop" autocomplete="off" disabled title="Stop">⏹</button>
-        <button id="request" autocomplete="off" disabled title="Dump data">⏷</button>
+        <button id="record" disabled autocomplete="off" title="Record">
+          ⏺
+        </button>
+        <button id="sec" disabled autocomplete="off" title="Record by 1 second">
+          ⏺<span>1s<span>
+        </button>
+        <button id="pause" disabled autocomplete="off" title="Pause">
+          ⏸
+        </button>
+        <button id="resume" disabled autocomplete="off" title="Resume">
+          ⏵
+        </button>
+        <button id="stop" autocomplete="off" disabled title="Stop">
+          ⏹
+        </button>
+        <button id="request" autocomplete="off" disabled title="Dump data">
+          ⏷
+        </button>
       </div>
       <div id="mode">
         Native support, <a href="?polyfill">force polyfill</a>

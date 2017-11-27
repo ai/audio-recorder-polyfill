@@ -8,8 +8,8 @@ var recorder, list, recordFull, recordParts, pause, resume, stop, request
 document.addEventListener('DOMContentLoaded', function () {
   list = document.getElementById('list')
 
-  recordParts = document.getElementById('recordParts')
-  recordFull = document.getElementById('recordFull')
+  recordParts = document.getElementById('sec')
+  recordFull = document.getElementById('record')
   request = document.getElementById('request')
   resume = document.getElementById('resume')
   pause = document.getElementById('pause')
@@ -96,7 +96,8 @@ function saveRecord (e) {
   li.appendChild(audio)
 
   var s = document.createElement('span')
-  s.innerText = e.data.type + ', ' + bytes(e.data.size, { unitSeparator: ' ' })
+  s.innerText = e.data.type + ', ' +
+    bytes(e.data.size, { unitSeparator: ' ', decimalPlaces: 0 })
   li.appendChild(s)
 
   list.appendChild(li)
