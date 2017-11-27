@@ -5,7 +5,7 @@ It uses Web Audio API and WAV encoder in Web Worker.
 Try it in **[online demo].**
 
 * **Spec compatible.** In the future when other browsers will support
-  `MediaRecorder` too, you will be able to remove polyfill.
+  `MediaRecorder`, you will be able to remove polyfill.
 * **Small.** Less than 1 KB (minified and gzipped). No dependencies.
   It uses [Size Limit] to control size.
 * **One file.** In contrast to other recorders, this polyfill uses
@@ -39,8 +39,8 @@ npm install --save audio-recorder-polyfill
 ```
 
 We recommend creating separated webpack bundle with polyfill. In this case,
-polyfill will be downloaded only by Edge and Safari. Good browsers will
-save bytes.
+polyfill will be downloaded only by Edge and Safari. Good browsers will
+download less.
 
 ```diff
   entry: {
@@ -69,10 +69,6 @@ without `MediaRecorder` support:
 
 ## Usage
 
-Even with polyfill, not all browsers will be able to record audio.
-Some of them doesn’t have Web Audio API. Polyfill has non-standard
-`MediaRecorder.notSupported` property to check support.
-
 In the begging, we need to show a warning in browsers without Web Audio API:
 
 ```js
@@ -82,7 +78,7 @@ if (MediaRecorder.notSupported) {
 }
 ```
 
-Then you can use standard [`MediaRecorder` API]:
+Then you can use standard `MediaRecorder` [API]:
 
 ```js
 let recorder
@@ -110,9 +106,9 @@ stopButton.addEventListener('click', () => {
 })
 ```
 
-If you need to upload audio to the servers, we recommend using `timeslice`.
-`MediaRecorder` will send you recorded data every specified millisecond.
-So you will start to upload audio before recording would finish.
+If you need to upload record to the server, we recommend using `timeslice`.
+`MediaRecorder` will send recorded data every specified millisecond.
+So you will start uploading before recording would finish.
 
 ```js
 // Will be executed every second with next part of audio file
@@ -123,14 +119,13 @@ recorder.addEventListener('dataavailable', e => {
 recorder.start(1000)
 ```
 
-[`MediaRecorder` API]: https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
+[API]: https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
 
 ## Audio Formats
 
-The main problem with audio recording is different audio formats in browsers.
 Chrome records natively only to `.webm` files. Firefox to `.ogg`.
 
-This polyfill saves records to `.wav` files. Compression in this format
+This polyfill saves records to `.wav` files. Compression
 is not very good, but encoding is fast and simple.
 
 You can get used file format in `e.data.type`:
@@ -170,7 +165,7 @@ you can change polyfill’s encoder:
 ```
 
 The encoder should be a function with Web Worker in the body. Polyfill will
-convert function to the string and will make Web Worker from it.
+convert function to the string to make Web Worker.
 
 ```js
 module.exports = function () {
