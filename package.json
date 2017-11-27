@@ -7,8 +7,12 @@
     "polyfill",
     "edge",
     "safari",
+    "wave",
     "wav",
-    "webrtc"
+    "webrtc",
+    "audio",
+    "web audio api",
+    "recorder"
   ],
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
