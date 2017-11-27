@@ -1,6 +1,6 @@
 # Audio Recorder Polyfill
 
-[MediaRecorder] polyfill to record audio in Edge and Safari 11.
+[`MediaRecorder`] polyfill to record audio in Edge and Safari 11.
 It uses Web Audio API and WAV encoder in Web Worker.
 Try it in **[online demo].**
 
@@ -66,3 +66,60 @@ without `MediaRecorder` support:
 +   </script>
     <script src="/app.js" defer></script>
 ```
+
+## Usage
+
+Even with polyfill not all browsers will be able to record audio.
+Some of them doesn’t have Web Audio API. Polyfill has non-standard
+`MediaRecorder.notSupported` property to check support.
+
+In the begging, we need to show warning in browsers without Web Audio API:
+
+```js
+if (MediaRecorder.notSupported) {
+  noSupport.style.display = 'block'
+  dictaphone.style.display = 'none'
+  return
+}
+```
+
+Then you can use standard [`MediaRecorder` API]:
+
+```js
+let recorder
+
+recordButton.addEventListener('click', () => {
+  // Request permissions to record audio
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    recorder = new MediaRecorder(stream)
+    // Set record to <audio> when recording will be finished
+    recorder.addEventListener('dataavailable', e => {
+      audio.src = URL.createObjectURL(e.data)
+    })
+    // Start recording
+    recorder.start()
+  })
+})
+
+stopButton.addEventListener('click', () => {
+  // Stop recording
+  recorder.stop()
+  // Remove “recording” icon from browser tab
+  recorder.stream.getTracks().forEach(i => i.stop())
+})
+```
+
+If you need to upload audio to the servers, we recommend to use `timeslice`.
+`MediaRecorder` will send you recorded data every specified milliseconds.
+So you will start to upload audio before recording would finished.
+
+```js
+    // Will be executed every second with next part of audio file
+    recorder.addEventListener('dataavailable', e => {
+      sendNextPiece(e.data)
+    })
+    // Dump audio data every second
+    recorder.start(1000)
+```
+
+[`MediaRecorder` API]: https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
