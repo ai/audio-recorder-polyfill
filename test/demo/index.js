@@ -62,9 +62,7 @@ function startRecording (type) {
 
 function stopRecording () {
   recorder.stop()
-  recorder.stream.getTracks().forEach(function (track) {
-    track.stop()
-  })
+  recorder.stream.getTracks()[0].stop()
   stop.blur()
 }
 
