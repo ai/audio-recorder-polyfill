@@ -21,9 +21,9 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 })
 ```
 
-[MediaRecorder]: https://developers.google.com/web/updates/2016/01/mediarecorder
-[online demo]:   https://ai.github.io/audio-recorder-polyfill/
-[Size Limit]:    https://github.com/ai/size-limit
+[`MediaRecorder`]: https://developers.google.com/web/updates/2016/01/mediarecorder
+[online demo]:     https://ai.github.io/audio-recorder-polyfill/
+[Size Limit]:      https://github.com/ai/size-limit
 
 <a href="https://evilmartians.com/?utm_source=audio-recorder-polyfill">
   <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
@@ -79,7 +79,6 @@ In the begging, we need to show warning in browsers without Web Audio API:
 if (MediaRecorder.notSupported) {
   noSupport.style.display = 'block'
   dictaphone.style.display = 'none'
-  return
 }
 ```
 
@@ -92,10 +91,12 @@ recordButton.addEventListener('click', () => {
   // Request permissions to record audio
   navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     recorder = new MediaRecorder(stream)
+
     // Set record to <audio> when recording will be finished
     recorder.addEventListener('dataavailable', e => {
       audio.src = URL.createObjectURL(e.data)
     })
+
     // Start recording
     recorder.start()
   })
