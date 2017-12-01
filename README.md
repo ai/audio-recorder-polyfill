@@ -1,5 +1,9 @@
 # Audio Recorder Polyfill
 
+<img align="right" width="75" height="75"
+     src="./logo.svg"
+     title="Audio Recorder Polyfill Logo">
+
 [`MediaRecorder`] polyfill to record audio in Edge and Safari 11.
 It uses Web Audio API and WAV encoder in Web Worker.
 Try it in **[online demo].**
