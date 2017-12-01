@@ -61,7 +61,7 @@ module.exports = function () {
     }
 
     recorded = []
-    postMessage(wav.buffer)
+    postMessage(wav.buffer, [wav.buffer])
   }
 
   onmessage = function (e) {
