@@ -1,6 +1,6 @@
 # Audio Recorder Polyfill
 
-<img align="right" width="85" height="85"
+<img align="right" width="80" height="80"
      src="./logo.svg"
      title="Audio Recorder Polyfill Logo">
 
