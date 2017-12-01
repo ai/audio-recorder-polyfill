@@ -20,7 +20,7 @@
   "devDependencies": {
     "bytes": "^3.0.0",
     "docdash": "^0.4.0",
-    "eslint": "^4.12.0",
+    "eslint": "^4.12.1",
     "eslint-config-logux": "^17.0.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-es5": "^1.1.0",
@@ -39,9 +39,9 @@
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
     "size-limit": "^0.13.2",
-    "uglifyjs-webpack-plugin": "^1.1.1",
-    "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4",
+    "uglifyjs-webpack-plugin": "^1.1.2",
+    "webpack": "^3.9.1",
+    "webpack-dev-server": "^2.9.5",
     "yaspeller-ci": "^1.0.0"
   },
   "scripts": {
@@ -71,7 +71,7 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "1013 B"
+      "limit": "1017 B"
     }
   ],
   "lint-staged": {
