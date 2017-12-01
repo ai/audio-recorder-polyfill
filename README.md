@@ -52,14 +52,14 @@ download less.
   }
 ```
 
-Install polyfill as `MediaRecorder` in this new bundle `src/polyfill.js`:
+Install polyfill as MediaRecorder in this new bundle `src/polyfill.js`:
 
 ```js
 window.MediaRecorder = require('audio-recorder-polyfill')
 ```
 
 Add this code to your HTML to load this new bundle only for browsers
-without `MediaRecorder` support:
+without MediaRecorder support:
 
 ```diff
 +   <script>
@@ -81,7 +81,7 @@ if (MediaRecorder.notSupported) {
 }
 ```
 
-Then you can use standard `MediaRecorder` [API]:
+Then you can use standard MediaRecorder [API]:
 
 ```js
 let recorder
@@ -110,7 +110,7 @@ stopButton.addEventListener('click', () => {
 ```
 
 If you need to upload record to the server, we recommend using `timeslice`.
-`MediaRecorder` will send recorded data every specified millisecond.
+MediaRecorder will send recorded data every specified millisecond.
 So you will start uploading before recording would finish.
 
 ```js
@@ -143,7 +143,7 @@ recorder.addEventListener('dataavailable', e => {
 
 ## Limitations
 
-This polyfill tries to be `MediaRecorder` API compatible.
+This polyfill tries to be MediaRecorder API compatible.
 But it still has small differences.
 
 * WAV format contains duration in the file header. As result, with `timeslice`
