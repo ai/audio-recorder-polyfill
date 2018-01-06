@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#00e5d2">
     <script>
       if (!window.MediaRecorder || /^\?polyfill/.test(location.search)) {
-        document.write(unescape('%3Cscript src="./polyfill.js">%3C/script>'))
+        document.write(decodeURI('%3Cscript src="./polyfill.js">%3C/script>'))
       }
     </script>
     <style>

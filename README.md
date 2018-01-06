@@ -64,7 +64,7 @@ without MediaRecorder support:
 ```diff
 +   <script>
 +     if (!window.MediaRecorder) {
-+       document.write(unescape('%3Cscript src="/polyfill.js">%3C/script>'))
++       document.write(decodeURI('%3Cscript src="/polyfill.js">%3C/script>'))
 +     }
 +   </script>
     <script src="/app.js" defer></script>
