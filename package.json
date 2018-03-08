@@ -20,28 +20,28 @@
   "devDependencies": {
     "bytes": "^3.0.0",
     "docdash": "^0.4.0",
-    "eslint": "^4.14.0",
-    "eslint-config-logux": "^17.0.0",
-    "eslint-config-standard": "^10.2.1",
+    "eslint": "^4.18.2",
+    "eslint-config-logux": "^21.0.0",
+    "eslint-config-standard": "^11.0.0",
     "eslint-plugin-es5": "^1.2.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jest": "^21.5.0",
-    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.13.0",
+    "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^3.0.1",
-    "html-webpack-inline-source-plugin": "^0.0.9",
-    "html-webpack-plugin": "^2.30.1",
-    "jest": "^22.0.4",
+    "html-webpack-inline-source-plugin": "^0.0.10",
+    "html-webpack-plugin": "^3.0.6",
+    "jest": "^22.4.2",
     "jsdoc": "^3.5.5",
-    "lint-staged": "^6.0.0",
+    "lint-staged": "^7.0.0",
     "nanodelay": "^0.1.3",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
-    "size-limit": "^0.13.2",
-    "uglifyjs-webpack-plugin": "^1.1.6",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7",
+    "size-limit": "^0.16.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0",
     "yaspeller-ci": "^1.0.0"
   },
   "scripts": {
@@ -53,7 +53,7 @@
     "unit": "jest --coverage",
     "test": "yarn unit && yarn lint && size-limit && yarn spell && yarn build",
     "start": "webpack-dev-server --config test/demo/webpack.config",
-    "build": "webpack --config test/demo/webpack.config -p"
+    "build": "webpack --mode production --config test/demo/webpack.config"
   },
   "jest": {
     "coverageThreshold": {
@@ -71,7 +71,7 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "1012 B"
+      "limit": "1018 B"
     }
   ],
   "lint-staged": {
