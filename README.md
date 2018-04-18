@@ -72,7 +72,7 @@ without MediaRecorder support:
 
 ## Usage
 
-In the begging, we need to show a warning in browsers without Web Audio API:
+In the beginning, we need to show a warning in browsers without Web Audio API:
 
 ```js
 if (MediaRecorder.notSupported) {
