@@ -5,6 +5,6 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-docs/
+api/
 coverage/
 test/demo/build/
