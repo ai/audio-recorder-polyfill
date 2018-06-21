@@ -9,6 +9,8 @@ function createWorker (fn) {
   return new Worker(URL.createObjectURL(blob))
 }
 
+var context
+
 /**
  * Audio Recorder with MediaRecorder API.
  *
@@ -73,12 +75,11 @@ MediaRecorder.prototype = {
     if (this.state === 'inactive') {
       this.state = 'recording'
 
-      if (this.context) {
-        this.context.close();
+      if (!context) {
+        context = new AudioContext()
       }
-      this.context = new AudioContext()
-      var input = this.context.createMediaStreamSource(this.stream)
-      var processor = this.context.createScriptProcessor(2048, 1, 1)
+      var input = context.createMediaStreamSource(this.stream)
+      var processor = context.createScriptProcessor(2048, 1, 1)
 
       var recorder = this
       processor.onaudioprocess = function (e) {
@@ -90,7 +91,7 @@ MediaRecorder.prototype = {
       }
 
       input.connect(processor)
-      processor.connect(this.context.destination)
+      processor.connect(context.destination)
 
       this.em.dispatchEvent(new Event('start'))
 
@@ -166,7 +167,7 @@ MediaRecorder.prototype = {
    */
   requestData: function requestData () {
     if (this.state !== 'inactive') {
-      this.encoder.postMessage(['dump', this.context.sampleRate])
+      this.encoder.postMessage(['dump', context.sampleRate])
     }
   },
 
