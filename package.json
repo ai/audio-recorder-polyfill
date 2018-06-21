@@ -71,7 +71,7 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "1018 B"
+      "limit": "992 B"
     }
   ],
   "lint-staged": {
