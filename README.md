@@ -5,7 +5,7 @@
      title="Audio Recorder Polyfill Logo">
 
 [MediaRecorder] polyfill to record audio in Edge and Safari 11.
-Try it in **[online demo].**
+Try it in **[online demo]** and see **[API]**.
 
 * **Spec compatible.** In the future when all browsers will support
   MediaRecorder, you will just remove polyfill.
@@ -27,6 +27,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 [MediaRecorder]: https://developers.google.com/web/updates/2016/01/mediarecorder
 [online demo]:   https://ai.github.io/audio-recorder-polyfill/
 [Size Limit]:    https://github.com/ai/size-limit
+[API]:           https://ai.github.io/audio-recorder-polyfill/api/MediaRecorder.html
 
 <a href="https://evilmartians.com/?utm_source=audio-recorder-polyfill">
   <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"

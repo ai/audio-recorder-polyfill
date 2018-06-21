@@ -26,7 +26,8 @@ module.exports = {
     }),
     new HtmlWebpackInlineSourcePlugin(),
     new CopyWebpackPlugin([
-      { from: './test/demo/favicon.ico', to: './' }
+      { from: './test/demo/favicon.ico', to: './' },
+      { from: './api/', to: './api/' }
     ])
   ],
   devServer: {
