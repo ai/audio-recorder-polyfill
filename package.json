@@ -62,22 +62,6 @@
       }
     }
   },
-  "eslintConfig": {
-    "extends": "eslint-config-logux/browser",
-    "globals": {
-      "onmessage": true
-    }
-  },
-  "size-limit": [
-    {
-      "path": "index.js",
-      "limit": "992 B"
-    }
-  ],
-  "lint-staged": {
-    "*.md": "yaspeller-ci",
-    "*.js": "eslint"
-  },
   "pre-commit": [
     "lint-staged"
   ]

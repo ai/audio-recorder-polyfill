@@ -12,4 +12,7 @@ coverage/
 docs/
 .jsdocrc
 .yaspellerrc
+.size-limit
+.lintstagedrc
+.eslintrc
 *.svg
