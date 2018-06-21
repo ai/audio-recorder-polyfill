@@ -1,5 +1,6 @@
 var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
 
 module.exports = {
@@ -23,7 +24,10 @@ module.exports = {
         minifyCSS: true
       }
     }),
-    new HtmlWebpackInlineSourcePlugin()
+    new HtmlWebpackInlineSourcePlugin(),
+    new CopyWebpackPlugin([
+      { from: './test/demo/favicon.ico', to: './' }
+    ])
   ],
   devServer: {
     contentBase: path.join(__dirname, 'build'),

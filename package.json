@@ -19,6 +19,7 @@
   "repository": "ai/audio-recorder-polyfill",
   "devDependencies": {
     "bytes": "^3.0.0",
+    "copy-webpack-plugin": "^4.5.1",
     "docdash": "^0.4.0",
     "eslint": "^4.19.1",
     "eslint-config-logux": "^23.0.0",
