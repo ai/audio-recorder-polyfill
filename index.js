@@ -73,6 +73,9 @@ MediaRecorder.prototype = {
     if (this.state === 'inactive') {
       this.state = 'recording'
 
+      if (this.context) {
+        this.context.close();
+      }
       this.context = new AudioContext()
       var input = this.context.createMediaStreamSource(this.stream)
       var processor = this.context.createScriptProcessor(2048, 1, 1)
