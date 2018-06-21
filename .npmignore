@@ -9,7 +9,7 @@ test/
 coverage/
 .travis.yml
 
-docs/
+api/
 .jsdocrc
 .yaspellerrc
 .size-limit

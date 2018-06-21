@@ -2,7 +2,7 @@
   "lang": "en",
   "ignoreCapitalization": true,
   "excludeFiles": [
-    "docs/*.js.html"
+    "api/*.js.html"
   ],
   "dictionary": [
     "JSDoc",
