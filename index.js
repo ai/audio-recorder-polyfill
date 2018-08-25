@@ -12,13 +12,13 @@ function createWorker (fn) {
 /**
  * Create a new Event of type 'error'
  *
- * @param {String} message The error message
+ * @param {String} method The method that failed
  * @return {Event} The error event
  */
-function MediaRecorderErrorEvent (message) {
+function MediaRecorderErrorEvent (method) {
   var event = new Event('error')
   event.data = {
-    message: message
+    message: 'Failed to execute \'' + method + '\''
   }
 
   return event
@@ -89,10 +89,7 @@ MediaRecorder.prototype = {
   start: function start (timeslice) {
     if (this.state !== 'inactive') {
       return this.em.dispatchEvent(
-        MediaRecorderErrorEvent(
-          "Failed to execute 'start' on the MediaRecorder:" +
-          "The MediaRecorder's state is not 'inactive'."
-        )
+        MediaRecorderErrorEvent('start')
       )
     }
 
@@ -140,10 +137,7 @@ MediaRecorder.prototype = {
   stop: function stop () {
     if (this.state === 'inactive') {
       return this.em.dispatchEvent(
-        MediaRecorderErrorEvent(
-          "Failed to execute 'stop' on the MediaRecorder:" +
-          "The MediaRecorder's state is 'inactive'."
-        )
+        MediaRecorderErrorEvent('stop')
       )
     }
 
@@ -165,10 +159,7 @@ MediaRecorder.prototype = {
   pause: function pause () {
     if (this.state !== 'recording') {
       return this.em.dispatchEvent(
-        MediaRecorderErrorEvent(
-          "Failed to execute 'pause' on the MediaRecorder:" +
-          "The MediaRecorder's state is not 'recording'."
-        )
+        MediaRecorderErrorEvent('pause')
       )
     }
 
@@ -189,10 +180,7 @@ MediaRecorder.prototype = {
   resume: function resume () {
     if (this.state !== 'paused') {
       return this.em.dispatchEvent(
-        MediaRecorderErrorEvent(
-          "Failed to execute 'resume' on the MediaRecorder:" +
-          "The MediaRecorder's state is not 'paused'."
-        )
+        MediaRecorderErrorEvent('resume')
       )
     }
 
@@ -213,10 +201,7 @@ MediaRecorder.prototype = {
   requestData: function requestData () {
     if (this.state === 'inactive') {
       return this.em.dispatchEvent(
-        MediaRecorderErrorEvent(
-          "Failed to execute 'requestData' on the MediaRecorder:" +
-          "The MediaRecorder's state is 'inactive'."
-        )
+        MediaRecorderErrorEvent('requestData')
       )
     }
 
