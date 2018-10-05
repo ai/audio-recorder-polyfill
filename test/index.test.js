@@ -90,15 +90,25 @@ it('has state and state events', function () {
   })
 })
 
-it('ignores command in wrong state', function () {
+it('dispatches error command in wrong state', function () {
   var recorder = new MediaRecorder()
   var events = listen(recorder)
+
+  var errors = []
+  recorder.addEventListener('error', function (event) {
+    errors.push(event.data.message)
+  })
 
   recorder.stop()
   recorder.pause()
   recorder.resume()
   expect(recorder.state).toEqual('inactive')
   expect(events).toEqual([])
+  expect(errors).toEqual([
+    'Wrong state for stop',
+    'Wrong state for pause',
+    'Wrong state for resume'
+  ])
 
   recorder.start()
   recorder.start()

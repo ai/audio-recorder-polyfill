@@ -9,18 +9,9 @@ function createWorker (fn) {
   return new Worker(URL.createObjectURL(blob))
 }
 
-/**
- * Create a new Event of type 'error'
- *
- * @param {String} method The method that failed
- * @return {Event} The error event
- */
-function MediaRecorderErrorEvent (method) {
+function error (method) {
   var event = new Event('error')
-  event.data = {
-    message: 'Failed to execute \'' + method + '\''
-  }
-
+  event.data = new Error('Wrong state for ' + method)
   return event
 }
 
@@ -88,9 +79,7 @@ MediaRecorder.prototype = {
    */
   start: function start (timeslice) {
     if (this.state !== 'inactive') {
-      return this.em.dispatchEvent(
-        MediaRecorderErrorEvent('start')
-      )
+      return this.em.dispatchEvent(error('start'))
     }
 
     this.state = 'recording'
@@ -136,9 +125,7 @@ MediaRecorder.prototype = {
    */
   stop: function stop () {
     if (this.state === 'inactive') {
-      return this.em.dispatchEvent(
-        MediaRecorderErrorEvent('stop')
-      )
+      return this.em.dispatchEvent(error('stop'))
     }
 
     this.requestData()
@@ -158,9 +145,7 @@ MediaRecorder.prototype = {
    */
   pause: function pause () {
     if (this.state !== 'recording') {
-      return this.em.dispatchEvent(
-        MediaRecorderErrorEvent('pause')
-      )
+      return this.em.dispatchEvent(error('pause'))
     }
 
     this.state = 'paused'
@@ -179,9 +164,7 @@ MediaRecorder.prototype = {
    */
   resume: function resume () {
     if (this.state !== 'paused') {
-      return this.em.dispatchEvent(
-        MediaRecorderErrorEvent('resume')
-      )
+      return this.em.dispatchEvent(error('resume'))
     }
 
     this.state = 'recording'
@@ -200,9 +183,7 @@ MediaRecorder.prototype = {
    */
   requestData: function requestData () {
     if (this.state === 'inactive') {
-      return this.em.dispatchEvent(
-        MediaRecorderErrorEvent('requestData')
-      )
+      return this.em.dispatchEvent(error('requestData'))
     }
 
     return this.encoder.postMessage(['dump', context.sampleRate])
