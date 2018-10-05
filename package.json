@@ -19,6 +19,7 @@
   "repository": "ai/audio-recorder-polyfill",
   "devDependencies": {
     "bytes": "^3.0.0",
+    "clean-publish": "^1.0.10",
     "copy-webpack-plugin": "^4.5.2",
     "docdash": "^1.0.0",
     "eslint": "^5.6.1",
@@ -65,5 +66,50 @@
   },
   "pre-commit": [
     "lint-staged"
-  ]
+  ],
+  "lint-staged": {
+    "*.md": "yaspeller-ci",
+    "*.js": "eslint"
+  },
+  "size-limit": [
+    {
+      "path": "index.js",
+      "limit": "992 B"
+    }
+  ],
+  "eslintConfig": {
+    "extends": "eslint-config-logux/browser",
+    "globals": {
+      "onmessage": true
+    }
+  },
+  "yaspeller": {
+    "lang": "en",
+    "ignoreCapitalization": true,
+    "excludeFiles": [
+      "api/*.js.html"
+    ],
+    "dictionary": [
+      "JSDoc",
+      "docdash",
+      "MediaRecorder",
+      "Versioning",
+      "polyfill",
+      "js",
+      "isTypeSupported",
+      "mimeType",
+      "MediaStream",
+      "dataavailable",
+      "addEventListener",
+      "dispatchEvent",
+      "removeEventListener",
+      "timeslice",
+      "notSupported",
+      "requestData",
+      "KB",
+      "gzipped",
+      "webpack",
+      "Chua"
+    ]
+  }
 }
