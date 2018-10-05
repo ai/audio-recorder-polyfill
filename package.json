@@ -74,7 +74,7 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "992 B"
+      "limit": "1072 B"
     }
   ],
   "eslintConfig": {
@@ -109,7 +109,9 @@
       "KB",
       "gzipped",
       "webpack",
-      "Chua"
+      "Chua",
+      "polyfill’s",
+      "polyfilled"
     ]
   }
 }
