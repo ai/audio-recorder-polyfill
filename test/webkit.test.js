@@ -8,6 +8,8 @@ it('detects support', function () {
 })
 
 it('uses audio context with prefix', function () {
-  var recorder = new MediaRecorder()
-  recorder.start()
+  expect(function () {
+    var recorder = new MediaRecorder()
+    recorder.start()
+  }).not.toThrow()
 })
