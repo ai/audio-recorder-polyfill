@@ -1,6 +1,6 @@
 {
   "name": "audio-recorder-polyfill",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "MediaRecorder polyfill to record audio in Edge and Safari",
   "keywords": [
     "mediarecorder",
