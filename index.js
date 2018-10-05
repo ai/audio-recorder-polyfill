@@ -9,6 +9,21 @@ function createWorker (fn) {
   return new Worker(URL.createObjectURL(blob))
 }
 
+/**
+ * Create a new Event of type 'error'
+ *
+ * @param {String} method The method that failed
+ * @return {Event} The error event
+ */
+function MediaRecorderErrorEvent (method) {
+  var event = new Event('error')
+  event.data = {
+    message: 'Failed to execute \'' + method + '\''
+  }
+
+  return event
+}
+
 var context
 
 /**
@@ -72,35 +87,41 @@ MediaRecorder.prototype = {
    * })
    */
   start: function start (timeslice) {
-    if (this.state === 'inactive') {
-      this.state = 'recording'
+    if (this.state !== 'inactive') {
+      return this.em.dispatchEvent(
+        MediaRecorderErrorEvent('start')
+      )
+    }
 
-      if (!context) {
-        context = new AudioContext()
-      }
-      var input = context.createMediaStreamSource(this.stream)
-      var processor = context.createScriptProcessor(2048, 1, 1)
+    this.state = 'recording'
 
-      var recorder = this
-      processor.onaudioprocess = function (e) {
-        if (recorder.state === 'recording') {
-          recorder.encoder.postMessage([
-            'encode', e.inputBuffer.getChannelData(0)
-          ])
-        }
-      }
+    if (!context) {
+      context = new AudioContext()
+    }
+    var input = context.createMediaStreamSource(this.stream)
+    var processor = context.createScriptProcessor(2048, 1, 1)
 
-      input.connect(processor)
-      processor.connect(context.destination)
-
-      this.em.dispatchEvent(new Event('start'))
-
-      if (timeslice) {
-        this.slicing = setInterval(function () {
-          if (recorder.state === 'recording') recorder.requestData()
-        }, timeslice)
+    var recorder = this
+    processor.onaudioprocess = function (e) {
+      if (recorder.state === 'recording') {
+        recorder.encoder.postMessage([
+          'encode', e.inputBuffer.getChannelData(0)
+        ])
       }
     }
+
+    input.connect(processor)
+    processor.connect(context.destination)
+
+    this.em.dispatchEvent(new Event('start'))
+
+    if (timeslice) {
+      this.slicing = setInterval(function () {
+        if (recorder.state === 'recording') recorder.requestData()
+      }, timeslice)
+    }
+
+    return undefined
   },
 
   /**
@@ -114,11 +135,15 @@ MediaRecorder.prototype = {
    * })
    */
   stop: function stop () {
-    if (this.state !== 'inactive') {
-      this.requestData()
-      this.state = 'inactive'
-      clearInterval(this.slicing)
+    if (this.state === 'inactive') {
+      return this.em.dispatchEvent(
+        MediaRecorderErrorEvent('stop')
+      )
     }
+
+    this.requestData()
+    this.state = 'inactive'
+    return clearInterval(this.slicing)
   },
 
   /**
@@ -132,10 +157,14 @@ MediaRecorder.prototype = {
    * })
    */
   pause: function pause () {
-    if (this.state === 'recording') {
-      this.state = 'paused'
-      this.em.dispatchEvent(new Event('pause'))
+    if (this.state !== 'recording') {
+      return this.em.dispatchEvent(
+        MediaRecorderErrorEvent('pause')
+      )
     }
+
+    this.state = 'paused'
+    return this.em.dispatchEvent(new Event('pause'))
   },
 
   /**
@@ -149,10 +178,14 @@ MediaRecorder.prototype = {
    * })
    */
   resume: function resume () {
-    if (this.state === 'paused') {
-      this.state = 'recording'
-      this.em.dispatchEvent(new Event('resume'))
+    if (this.state !== 'paused') {
+      return this.em.dispatchEvent(
+        MediaRecorderErrorEvent('resume')
+      )
     }
+
+    this.state = 'recording'
+    return this.em.dispatchEvent(new Event('resume'))
   },
 
   /**
@@ -166,15 +199,20 @@ MediaRecorder.prototype = {
    * })
    */
   requestData: function requestData () {
-    if (this.state !== 'inactive') {
-      this.encoder.postMessage(['dump', context.sampleRate])
+    if (this.state === 'inactive') {
+      return this.em.dispatchEvent(
+        MediaRecorderErrorEvent('requestData')
+      )
     }
+
+    return this.encoder.postMessage(['dump', context.sampleRate])
   },
 
   /**
    * Add listener for specified event type.
    *
-   * @param {"start"|"stop"|"pause"|"resume"|"dataavailable"} type Event type.
+   * @param {"start"|"stop"|"pause"|"resume"|"dataavailable"|"error"}
+   * type Event type.
    * @param {function} listener The listener function.
    *
    * @return {undefined}
@@ -191,7 +229,8 @@ MediaRecorder.prototype = {
   /**
    * Remove event listener.
    *
-   * @param {"start"|"stop"|"pause"|"resume"|"dataavailable"} type Event type.
+   * @param {"start"|"stop"|"pause"|"resume"|"dataavailable"|"error"}
+   * type Event type.
    * @param {function} listener The same function used in `addEventListener`.
    *
    * @return {undefined}
