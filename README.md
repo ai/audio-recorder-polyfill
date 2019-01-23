@@ -153,8 +153,6 @@ But it still has small differences.
   to first `dataavailable`. Other events receive addition bytes
   to the same file.
 * Constructor options are not supported.
-* Polyfill ignores method call in the wrong state (like `stop()`
-  during `inactive` state) instead of throwing an error.
 * `BlobEvent.timecode` is not supported.
 
 ## Custom Encoder
