@@ -78,6 +78,9 @@ MediaRecorder.prototype = {
    * })
    */
   start: function start (timeslice) {
+    /**
+      Create a clone of stream and start recording
+    */
     if (this.state !== 'inactive') {
       return this.em.dispatchEvent(error('start'))
     }
@@ -87,7 +90,8 @@ MediaRecorder.prototype = {
     if (!context) {
       context = new AudioContext()
     }
-    var input = context.createMediaStreamSource(this.stream)
+    this.clonedStream = this.stream.clone()
+    var input = context.createMediaStreamSource(this.clonedStream)
     var processor = context.createScriptProcessor(2048, 1, 1)
 
     var recorder = this
@@ -124,12 +128,16 @@ MediaRecorder.prototype = {
    * })
    */
   stop: function stop () {
+    /**
+      Stop stream and end cloned stream tracks
+    */
     if (this.state === 'inactive') {
       return this.em.dispatchEvent(error('stop'))
     }
 
     this.requestData()
     this.state = 'inactive'
+    this.clonedStream.getTracks().forEach(track => track.stop())
     return clearInterval(this.slicing)
   },
 
