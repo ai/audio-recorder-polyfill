@@ -13,6 +13,23 @@ AudioContext.prototype = {
 
 global.AudioContext = AudioContext
 
+function MediaStream () { }
+
+MediaStream.prototype = {
+  clone: function () {
+    return this
+  },
+  getTracks: function () {
+    return [
+      {
+        stop: function () { }
+      }
+    ]
+  }
+}
+
+global.MediaStream = MediaStream
+
 function Worker (url) {
   this.url = url
 }

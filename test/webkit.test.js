@@ -9,7 +9,7 @@ it('detects support', function () {
 
 it('uses audio context with prefix', function () {
   expect(function () {
-    var recorder = new MediaRecorder()
+    var recorder = new MediaRecorder(new MediaStream())
     recorder.start()
   }).not.toThrow()
 })

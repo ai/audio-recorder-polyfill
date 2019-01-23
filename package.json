@@ -18,17 +18,17 @@
   "license": "MIT",
   "repository": "ai/audio-recorder-polyfill",
   "devDependencies": {
-    "bytes": "^3.0.0",
-    "clean-publish": "^1.0.10",
-    "copy-webpack-plugin": "^4.5.2",
-    "docdash": "^1.0.0",
-    "eslint": "^5.6.1",
-    "eslint-config-logux": "^25.0.1",
+    "@logux/eslint-config": "^27.0.0",
+    "bytes": "^3.1.0",
+    "clean-publish": "^1.1.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "docdash": "^1.0.2",
+    "eslint": "^5.12.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-es5": "^1.3.1",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^21.24.1",
-    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-jest": "^22.1.3",
+    "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.0",
@@ -36,14 +36,14 @@
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
     "jsdoc": "^3.5.5",
-    "lint-staged": "^7.3.0",
+    "lint-staged": "^8.1.0",
     "nanodelay": "^0.1.4",
     "pre-commit": "^1.2.2",
-    "rimraf": "^2.6.2",
-    "size-limit": "^0.20.1",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9",
+    "rimraf": "^2.6.3",
+    "size-limit": "^0.21.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
     "yaspeller-ci": "^1.0.0"
   },
   "scripts": {
@@ -74,11 +74,11 @@
   "size-limit": [
     {
       "path": "index.js",
-      "limit": "1072 B"
+      "limit": "1.1 KB"
     }
   ],
   "eslintConfig": {
-    "extends": "eslint-config-logux/browser",
+    "extends": "@logux/eslint-config/browser",
     "globals": {
       "onmessage": true
     }

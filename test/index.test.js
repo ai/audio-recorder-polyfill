@@ -44,7 +44,7 @@ it('checks audio format support', function () {
 })
 
 it('saves stream', function () {
-  var stream = { }
+  var stream = new MediaStream()
   var recorder = new MediaRecorder(stream)
   expect(recorder.stream).toBe(stream)
 })
@@ -64,7 +64,7 @@ it('saves event listeners', function () {
 })
 
 it('has state and state events', function () {
-  var recorder = new MediaRecorder()
+  var recorder = new MediaRecorder(new MediaStream())
   expect(recorder.state).toEqual('inactive')
 
   var events = listen(recorder)
@@ -91,7 +91,7 @@ it('has state and state events', function () {
 })
 
 it('dispatches error command in wrong state', function () {
-  var recorder = new MediaRecorder()
+  var recorder = new MediaRecorder(new MediaStream())
   var events = listen(recorder)
 
   var errors = []
@@ -118,7 +118,7 @@ it('dispatches error command in wrong state', function () {
 })
 
 it('allows to stop paused recording', function () {
-  var recorder = new MediaRecorder()
+  var recorder = new MediaRecorder(new MediaStream())
   recorder.start()
   recorder.pause()
   recorder.stop()
@@ -135,7 +135,7 @@ it('detects support', function () {
 })
 
 it('allow to request captured data', function () {
-  var recorder = new MediaRecorder()
+  var recorder = new MediaRecorder(new MediaStream())
   var events = listen(recorder)
   fakeEncoder(recorder)
 
@@ -162,7 +162,7 @@ it('sends every data chunk to encoder', function () {
     return processor
   }
 
-  var recorder = new MediaRecorder()
+  var recorder = new MediaRecorder(new MediaStream())
   var calls = 0
   recorder.encoder.postMessage = function (data) {
     if (data[0] === 'encode') {
@@ -192,7 +192,7 @@ it('sends every data chunk to encoder', function () {
 })
 
 it('supports slicing in start method', function () {
-  var recorder = new MediaRecorder()
+  var recorder = new MediaRecorder(new MediaStream())
   fakeEncoder(recorder)
 
   var calls = 0
