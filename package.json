@@ -51,7 +51,7 @@
     "spell": "yarn api && yaspeller-ci *.md api/*.html",
     "clean": "rimraf api/ coverage/ test/demo/build/",
     "lint": "eslint *.js test/{**/,}*.js",
-    "api": "jsdoc --configure .jsdocrc *.js",
+    "api": "jsdoc -d api/ -t node_modules/docdash *.js",
     "unit": "jest --coverage",
     "test": "yarn unit && yarn lint && size-limit && yarn spell && yarn build",
     "start": "webpack-dev-server --config test/demo/webpack.config",
@@ -111,7 +111,12 @@
       "webpack",
       "Chua",
       "polyfill’s",
-      "polyfilled"
+      "polyfilled",
+      "GMT",
+      "Mon",
+      "Tue",
+      "Thu",
+      "Fri"
     ]
   }
 }
