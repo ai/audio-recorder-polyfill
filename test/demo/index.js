@@ -1,9 +1,27 @@
-var bytes = require('bytes')
-
 var EVENTS = ['start', 'stop', 'pause', 'resume']
 var TYPES = ['audio/webm', 'audio/ogg', 'audio/wav']
 
 var recorder, list, recordFull, recordParts, pause, resume, stop, request
+
+const KB = 1 << 10
+const MB = 1 << 20
+
+function bytes (value) {
+  var mag = Math.abs(value)
+
+  let unit
+  if (mag >= MB) {
+    unit = 'MB'
+    value = value / MB
+  } else if (mag >= KB) {
+    unit = 'KB'
+    value = value / KB
+  } else {
+    unit = 'B'
+  }
+
+  return value.toFixed(0).replace(/(?:\.0*|(\.[^0]+)0+)$/, '$1') + ' ' + unit
+}
 
 function startRecording (type) {
   list.innerHTML = ''
@@ -54,8 +72,7 @@ function saveRecord (e) {
   li.appendChild(strong)
 
   var s = document.createElement('span')
-  s.innerText = e.data.type + ', ' +
-    bytes(e.data.size, { unitSeparator: ' ', decimalPlaces: 0 })
+  s.innerText = e.data.type + ', ' + bytes(e.data.size)
   li.appendChild(s)
 
   var audio = document.createElement('audio')

@@ -19,7 +19,6 @@
   "repository": "ai/audio-recorder-polyfill",
   "devDependencies": {
     "@logux/eslint-config": "^27.0.0",
-    "bytes": "^3.1.0",
     "clean-publish": "^1.1.0",
     "docdash": "^1.0.2",
     "eslint": "^5.12.1",
@@ -51,7 +50,7 @@
     "api": "jsdoc -d api/ -t node_modules/docdash *.js",
     "unit": "jest --coverage",
     "test": "yarn unit && yarn lint && size-limit && yarn spell && yarn build",
-    "start": "parcel serve ./test/demo/index.pug ./test/demo/polyfill.js --open",
+    "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
     "build": "yarn clean && NODE_ENV=production node ./test/demo/build.js"
   },
   "jest": {
