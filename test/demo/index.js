@@ -5,41 +5,6 @@ var TYPES = ['audio/webm', 'audio/ogg', 'audio/wav']
 
 var recorder, list, recordFull, recordParts, pause, resume, stop, request
 
-document.addEventListener('DOMContentLoaded', function () {
-  list = document.getElementById('list')
-
-  recordParts = document.getElementById('sec')
-  recordFull = document.getElementById('record')
-  request = document.getElementById('request')
-  resume = document.getElementById('resume')
-  pause = document.getElementById('pause')
-  stop = document.getElementById('stop')
-
-  if (MediaRecorder.notSupported) {
-    list.style.display = 'none'
-    document.getElementById('controls').style.display = 'none'
-    document.getElementById('formats').style.display = 'none'
-    document.getElementById('mode').style.display = 'none'
-    document.getElementById('support').style.display = 'block'
-    return
-  }
-
-  document.getElementById('formats').innerText = 'Format: ' +
-    TYPES.filter(function (i) {
-      return MediaRecorder.isTypeSupported(i)
-    }).join(', ')
-
-  recordParts.addEventListener('click', startRecording.bind(null, 'parts'))
-  recordFull.addEventListener('click', startRecording.bind(null, 'full'))
-  request.addEventListener('click', requestData)
-  resume.addEventListener('click', resumeRecording)
-  pause.addEventListener('click', pauseRecording)
-  stop.addEventListener('click', stopRecording)
-
-  recordParts.disabled = false
-  recordFull.disabled = false
-})
-
 function startRecording (type) {
   list.innerHTML = ''
   navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
@@ -131,4 +96,36 @@ function changeState (eventName) {
     pause.disabled = true
     stop.disabled = true
   }
+}
+
+list = document.getElementById('list')
+
+recordParts = document.getElementById('sec')
+recordFull = document.getElementById('record')
+request = document.getElementById('request')
+resume = document.getElementById('resume')
+pause = document.getElementById('pause')
+stop = document.getElementById('stop')
+
+if (MediaRecorder.notSupported) {
+  list.style.display = 'none'
+  document.getElementById('controls').style.display = 'none'
+  document.getElementById('formats').style.display = 'none'
+  document.getElementById('mode').style.display = 'none'
+  document.getElementById('support').style.display = 'block'
+} else {
+  document.getElementById('formats').innerText = 'Format: ' +
+    TYPES.filter(function (i) {
+      return MediaRecorder.isTypeSupported(i)
+    }).join(', ')
+
+  recordParts.addEventListener('click', startRecording.bind(null, 'parts'))
+  recordFull.addEventListener('click', startRecording.bind(null, 'full'))
+  request.addEventListener('click', requestData)
+  resume.addEventListener('click', resumeRecording)
+  pause.addEventListener('click', pauseRecording)
+  stop.addEventListener('click', stopRecording)
+
+  recordParts.disabled = false
+  recordFull.disabled = false
 }

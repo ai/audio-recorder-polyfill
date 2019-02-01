@@ -42,9 +42,9 @@ Install package:
 npm install --save audio-recorder-polyfill
 ```
 
-We recommend creating separated webpack bundle with polyfill. In this case,
-polyfill will be downloaded only by Edge and Safari. Good browsers will
-download less.
+We recommend creating separated webpack/Parcel bundle with polyfill.
+In this case, polyfill will be downloaded only by Edge and Safari.
+Good browsers will download less.
 
 ```diff
   entry: {
