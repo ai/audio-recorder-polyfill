@@ -90,8 +90,8 @@ MediaRecorder.prototype = {
     if (!context) {
       context = new AudioContext()
     }
-    this.stream = this.stream.clone()
-    var input = context.createMediaStreamSource(this.stream)
+    this.clone = this.stream.clone()
+    var input = context.createMediaStreamSource(this.clone)
     var processor = context.createScriptProcessor(2048, 1, 1)
 
     var recorder = this
@@ -137,7 +137,7 @@ MediaRecorder.prototype = {
 
     this.requestData()
     this.state = 'inactive'
-    this.stream.getTracks().forEach(function (track) {
+    this.clone.getTracks().forEach(function (track) {
       track.stop()
     })
     return clearInterval(this.slicing)
