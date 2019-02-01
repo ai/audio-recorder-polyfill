@@ -1,48 +1,36 @@
 navigator.mediaDevices = { }
 
-function AudioContext () { }
-
-AudioContext.prototype = {
-  createScriptProcessor: function () {
-    return { connect: function () { } }
-  },
-  createMediaStreamSource: function () {
-    return { connect: function () { } }
+class AudioContext {
+  createScriptProcessor () {
+    return { connect () { } }
+  }
+  createMediaStreamSource () {
+    return { connect () { } }
   }
 }
-
 global.AudioContext = AudioContext
 
-function MediaStream () { }
-
-MediaStream.prototype = {
-  clone: function () {
+class MediaStream {
+  clone () {
     return this
-  },
-  getTracks: function () {
+  }
+  getTracks () {
     return [
-      {
-        stop: function () { }
-      }
+      { stop () { } }
     ]
   }
 }
-
 global.MediaStream = MediaStream
 
-function Worker (url) {
-  this.url = url
-}
-
-Worker.prototype = {
-  addEventListener: function (type, cb) {
+class Worker {
+  constructor (url) {
+    this.url = url
+  }
+  addEventListener (type, cb) {
     this.listener = cb
-  },
-  postMessage: function () { }
+  }
+  postMessage () { }
 }
-
 global.Worker = Worker
 
-URL.createObjectURL = function (blob) {
-  return blob
-}
+URL.createObjectURL = blob => blob

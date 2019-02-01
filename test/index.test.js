@@ -1,13 +1,13 @@
-var delay = require('nanodelay')
+let delay = require('nanodelay')
 
 require('./browser.js')
-var MediaRecorder = require('../')
+let MediaRecorder = require('../')
 
 function listen (recorder) {
-  var events = []
-  var names = ['start', 'stop', 'pause', 'resume', 'dataavailable']
-  names.forEach(function (i) {
-    recorder.addEventListener(i, function () {
+  let events = []
+  let names = ['start', 'stop', 'pause', 'resume', 'dataavailable']
+  names.forEach(i => {
+    recorder.addEventListener(i, () => {
       events.push(i)
     })
   })
@@ -15,9 +15,9 @@ function listen (recorder) {
 }
 
 function fakeEncoder (recorder) {
-  recorder.encoder.postMessage = function (data) {
+  recorder.encoder.postMessage = data => {
     if (data[0] === 'dump') {
-      Promise.resolve().then(function () {
+      Promise.resolve().then(() => {
         recorder.encoder.listener('sound')
       })
     }
@@ -25,34 +25,34 @@ function fakeEncoder (recorder) {
 }
 
 function waitForData (recorder) {
-  return new Promise(function (resolve) {
+  return new Promise(resolve => {
     recorder.addEventListener('dataavailable', resolve)
   })
 }
 
-var originEncoder = MediaRecorder.encoder
-var originCreate = AudioContext.prototype.createScriptProcessor
-beforeEach(function () {
+let originEncoder = MediaRecorder.encoder
+let originCreate = AudioContext.prototype.createScriptProcessor
+beforeEach(() => {
   MediaRecorder.encoder = originEncoder
   AudioContext.prototype.createScriptProcessor = originCreate
 })
 
-it('checks audio format support', function () {
+it('checks audio format support', () => {
   expect(MediaRecorder.isTypeSupported('audio/wav')).toBeTruthy()
   expect(MediaRecorder.isTypeSupported('audio/wave')).toBeTruthy()
   expect(MediaRecorder.isTypeSupported('audio/webm')).toBeFalsy()
 })
 
-it('saves stream', function () {
-  var stream = new MediaStream()
-  var recorder = new MediaRecorder(stream)
+it('saves stream', () => {
+  let stream = new MediaStream()
+  let recorder = new MediaRecorder(stream)
   expect(recorder.stream).toBe(stream)
 })
 
-it('saves event listeners', function () {
-  var recorder = new MediaRecorder()
-  var event = new Event('stop')
-  var cb = jest.fn()
+it('saves event listeners', () => {
+  let recorder = new MediaRecorder()
+  let event = new Event('stop')
+  let cb = jest.fn()
 
   recorder.addEventListener('stop', cb)
   recorder.dispatchEvent(event)
@@ -63,11 +63,11 @@ it('saves event listeners', function () {
   expect(cb).toHaveBeenCalledTimes(1)
 })
 
-it('has state and state events', function () {
-  var recorder = new MediaRecorder(new MediaStream())
+it('has state and state events', async () => {
+  let recorder = new MediaRecorder(new MediaStream())
   expect(recorder.state).toEqual('inactive')
 
-  var events = listen(recorder)
+  let events = listen(recorder)
   fakeEncoder(recorder)
 
   recorder.start()
@@ -83,19 +83,18 @@ it('has state and state events', function () {
   expect(recorder.state).toEqual('inactive')
   expect(events).toEqual(['start', 'pause', 'resume'])
 
-  return waitForData(recorder).then(function () {
-    expect(events).toEqual([
-      'start', 'pause', 'resume', 'dataavailable', 'stop'
-    ])
-  })
+  await waitForData(recorder)
+  expect(events).toEqual([
+    'start', 'pause', 'resume', 'dataavailable', 'stop'
+  ])
 })
 
-it('dispatches error command in wrong state', function () {
-  var recorder = new MediaRecorder(new MediaStream())
-  var events = listen(recorder)
+it('dispatches error command in wrong state', () => {
+  let recorder = new MediaRecorder(new MediaStream())
+  let events = listen(recorder)
 
-  var errors = []
-  recorder.addEventListener('error', function (event) {
+  let errors = []
+  recorder.addEventListener('error', event => {
     errors.push(event.data.message)
   })
 
@@ -117,26 +116,26 @@ it('dispatches error command in wrong state', function () {
   expect(events).toEqual(['start'])
 })
 
-it('allows to stop paused recording', function () {
-  var recorder = new MediaRecorder(new MediaStream())
+it('allows to stop paused recording', () => {
+  let recorder = new MediaRecorder(new MediaStream())
   recorder.start()
   recorder.pause()
   recorder.stop()
   expect(recorder.state).toEqual('inactive')
 })
 
-it('shows used MIME type', function () {
-  var recorder = new MediaRecorder()
+it('shows used MIME type', () => {
+  let recorder = new MediaRecorder()
   expect(recorder.mimeType).toEqual('audio/wav')
 })
 
-it('detects support', function () {
+it('detects support', () => {
   expect(MediaRecorder.notSupported).toBeFalsy()
 })
 
-it('allow to request captured data', function () {
-  var recorder = new MediaRecorder(new MediaStream())
-  var events = listen(recorder)
+it('allow to request captured data', async () => {
+  let recorder = new MediaRecorder(new MediaStream())
+  let events = listen(recorder)
   fakeEncoder(recorder)
 
   recorder.requestData()
@@ -144,27 +143,26 @@ it('allow to request captured data', function () {
 
   recorder.start()
   recorder.requestData()
-  return waitForData(recorder).then(function () {
-    expect(events).toEqual(['start', 'dataavailable'])
-  })
+  await waitForData(recorder)
+  expect(events).toEqual(['start', 'dataavailable'])
 })
 
-it('sends every data chunk to encoder', function () {
-  var event = {
+it('sends every data chunk to encoder', () => {
+  let event = {
     inputBuffer: {
-      getChannelData: function (channel) {
+      getChannelData (channel) {
         return [channel]
       }
     }
   }
-  var processor = { connect: function () { }, a: 1 }
-  AudioContext.prototype.createScriptProcessor = function () {
+  let processor = { connect () { }, a: 1 }
+  AudioContext.prototype.createScriptProcessor = () => {
     return processor
   }
 
-  var recorder = new MediaRecorder(new MediaStream())
-  var calls = 0
-  recorder.encoder.postMessage = function (data) {
+  let recorder = new MediaRecorder(new MediaStream())
+  let calls = 0
+  recorder.encoder.postMessage = data => {
     if (data[0] === 'encode') {
       expect(data[1]).toEqual([0])
       calls += 1
@@ -191,54 +189,44 @@ it('sends every data chunk to encoder', function () {
   expect(calls).toEqual(3)
 })
 
-it('supports slicing in start method', function () {
-  var recorder = new MediaRecorder(new MediaStream())
+it('supports slicing in start method', async () => {
+  let recorder = new MediaRecorder(new MediaStream())
   fakeEncoder(recorder)
 
-  var calls = 0
-  recorder.addEventListener('dataavailable', function (e) {
+  let calls = 0
+  recorder.addEventListener('dataavailable', e => {
     expect(e.data).toBeInstanceOf(Blob)
     expect(e.data.type).toEqual('audio/wav')
     calls += 1
   })
 
   recorder.start(500)
-  return delay(10).then(function () {
-    expect(calls).toEqual(0)
-    return delay(500)
-  }).then(function () {
-    expect(calls).toEqual(1)
-    return delay(510)
-  }).then(function () {
-    expect(calls).toEqual(2)
-    recorder.pause()
-    return delay(510)
-  }).then(function () {
-    expect(calls).toEqual(2)
-    return delay(250)
-  }).then(function () {
-    recorder.resume()
-    return delay(250)
-  }).then(function () {
-    expect(calls).toEqual(3)
-    recorder.stop()
-    return delay(1)
-  }).then(function () {
-    expect(calls).toEqual(4)
-    return delay(510)
-  }).then(function () {
-    expect(calls).toEqual(4)
-  })
+  await delay(10)
+  expect(calls).toEqual(0)
+  await delay(500)
+  expect(calls).toEqual(1)
+  await delay(510)
+  expect(calls).toEqual(2)
+  recorder.pause()
+  await delay(510)
+  expect(calls).toEqual(2)
+  await delay(250)
+  recorder.resume()
+  await delay(250)
+  expect(calls).toEqual(3)
+  recorder.stop()
+  await delay(1)
+  expect(calls).toEqual(4)
+  await delay(510)
+  expect(calls).toEqual(4)
 })
 
-it('allows to change encoder', function () {
-  var recorder = new MediaRecorder()
+it('allows to change encoder', () => {
+  let recorder = new MediaRecorder()
   expect(recorder.encoder.url.size).toBeGreaterThan(9)
 
-  MediaRecorder.encoder = function () {
-    return 1
-  }
+  MediaRecorder.encoder = () => 1
 
   recorder = new MediaRecorder()
-  expect(recorder.encoder.url.size).toEqual(17)
+  expect(recorder.encoder.url.size).toEqual(7)
 })

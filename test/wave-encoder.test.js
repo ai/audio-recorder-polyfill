@@ -1,12 +1,12 @@
-var waveEncoder = require('../wave-encoder')
+let waveEncoder = require('../wave-encoder')
 
-var messages
-beforeEach(function () {
+let messages
+beforeEach(() => {
   messages = []
-  global.postMessage = function (msg) {
-    var from = new Uint8Array(msg)
-    var array = []
-    for (var i = 0; i < from.length; i++) {
+  global.postMessage = msg => {
+    let from = new Uint8Array(msg)
+    let array = []
+    for (let i = 0; i < from.length; i++) {
       array.push(from[i])
     }
     messages.push(array)
@@ -15,7 +15,7 @@ beforeEach(function () {
   waveEncoder()
 })
 
-it('encodes data to WAVE', function () {
+it('encodes data to WAVE', () => {
   onmessage({ data: ['encode', [0.5]] })
   onmessage({ data: ['encode', [2]] })
   onmessage({ data: ['encode', [-3]] })
@@ -34,7 +34,7 @@ it('encodes data to WAVE', function () {
   ])
 })
 
-it('allow to call dump multiple times', function () {
+it('allow to call dump multiple times', () => {
   onmessage({ data: ['encode', [0.5]] })
   onmessage({ data: ['encode', [2]] })
   onmessage({ data: ['dump', 44100] })

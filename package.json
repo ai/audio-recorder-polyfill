@@ -81,7 +81,21 @@
     "extends": "@logux/eslint-config/browser",
     "globals": {
       "onmessage": true
-    }
+    },
+    "overrides": [
+      {
+        "files": ["test/**/*"],
+        "rules": {
+          "es5/no-shorthand-properties": "off",
+          "es5/no-arrow-functions": "off",
+          "es5/no-destructuring": "off",
+          "es5/no-block-scoping": "off",
+          "es5/no-es6-methods": "off",
+          "es5/no-classes": "off",
+          "es5/no-spread": "off"
+        }
+      }
+    ]
   },
   "yaspeller": {
     "lang": "en",
