@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.4
+* Fix noise in Safari (by Sri Harsha Gangisetty).
+
 ## 0.1.3
 * Fix compatibility by adding `error` event (by Tom Quirk).
 
