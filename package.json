@@ -44,14 +44,14 @@
   },
   "scripts": {
     "lint-staged": "lint-staged",
-    "spell": "yarn api && yaspeller-ci *.md api/*.html",
-    "clean": "rimraf api/ coverage/ test/demo/build/",
+    "spell": "yaspeller-ci *.md test/demo/build/api/*.html",
+    "clean": "rimraf coverage/ test/demo/build/",
     "lint": "eslint *.js test/{**/,}*.js",
-    "api": "jsdoc -d api/ -t node_modules/docdash *.js",
+    "api": "jsdoc -d test/demo/build/api/ -t node_modules/docdash *.js",
     "unit": "jest --coverage",
-    "test": "yarn unit && yarn lint && size-limit && yarn spell && yarn build",
+    "test": "yarn unit && yarn lint && size-limit && yarn build && yarn spell",
     "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
-    "build": "yarn clean && NODE_ENV=production node ./test/demo/build.js"
+    "build": "yarn clean && yarn api && NODE_ENV=production node ./test/demo/build.js"
   },
   "jest": {
     "coverageThreshold": {
