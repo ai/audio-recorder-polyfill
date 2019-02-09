@@ -15,7 +15,7 @@ function error (method) {
   return event
 }
 
-var context
+var context, processor
 
 /**
  * Audio Recorder with MediaRecorder API.
@@ -92,7 +92,7 @@ MediaRecorder.prototype = {
     }
     this.clone = this.stream.clone()
     var input = context.createMediaStreamSource(this.clone)
-    var processor = context.createScriptProcessor(2048, 1, 1)
+    processor = context.createScriptProcessor(2048, 1, 1)
 
     var recorder = this
     processor.onaudioprocess = function (e) {
