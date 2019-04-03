@@ -8,7 +8,7 @@
 Try it in **[online demo]** and see **[API]**.
 
 * **Spec compatible.** In the future when all browsers will support
-  MediaRecorder, you will just remove polyfill.
+  MediaRecorder, you will remove polyfill.
 * **Small.** 1.1 KB (minified and gzipped). No dependencies.
   It uses [Size Limit] to control size.
 * **One file.** In contrast to other recorders, this polyfill uses
