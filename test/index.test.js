@@ -30,11 +30,14 @@ function waitForData (recorder) {
   })
 }
 
+let processor = { connect () { }, a: 1 }
+AudioContext.prototype.createScriptProcessor = () => {
+  return processor
+}
+
 let originEncoder = MediaRecorder.encoder
-let originCreate = AudioContext.prototype.createScriptProcessor
 beforeEach(() => {
   MediaRecorder.encoder = originEncoder
-  AudioContext.prototype.createScriptProcessor = originCreate
 })
 
 it('checks audio format support', () => {
@@ -154,10 +157,6 @@ it('sends every data chunk to encoder', () => {
         return [channel]
       }
     }
-  }
-  let processor = { connect () { }, a: 1 }
-  AudioContext.prototype.createScriptProcessor = () => {
-    return processor
   }
 
   let recorder = new MediaRecorder(new MediaStream())
