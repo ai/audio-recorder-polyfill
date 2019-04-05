@@ -92,7 +92,10 @@ MediaRecorder.prototype = {
     }
     this.clone = this.stream.clone()
     var input = context.createMediaStreamSource(this.clone)
-    processor = context.createScriptProcessor(2048, 1, 1)
+
+    if (!processor) {
+      processor = context.createScriptProcessor(2048, 1, 1)
+    }
 
     var recorder = this
     processor.onaudioprocess = function (e) {
