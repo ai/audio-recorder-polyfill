@@ -1,6 +1,6 @@
 {
   "name": "audio-recorder-polyfill",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "MediaRecorder polyfill to record audio in Edge and Safari",
   "keywords": [
     "mediarecorder",
@@ -134,7 +134,8 @@
       "Harsha",
       "Gangisetty",
       "Shunsuke",
-      "Mano"
+      "Mano",
+      "floydback"
     ]
   }
 }

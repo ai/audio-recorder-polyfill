@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.6
+* Allow to record after calling `stop()` (by @floydback).
+
 ## 0.1.5
 * Fix problem with Safari garbage collection (by Shunsuke Mano).
 
