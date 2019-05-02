@@ -32,6 +32,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.0",
+    "husky": "^2.2.0",
     "install": "^0.12.2",
     "jest": "^24.7.1",
     "lint-staged": "^8.1.5",
@@ -39,14 +40,12 @@
     "npm": "^6.9.0",
     "parcel-bundler": "^1.12.3",
     "posthtml": "^0.11.3",
-    "pre-commit": "^1.2.2",
     "pug": "^2.0.3",
     "rimraf": "^2.6.3",
     "size-limit": "^1.0.0",
     "yaspeller-ci": "^1.0.0"
   },
   "scripts": {
-    "lint-staged": "lint-staged",
     "spell": "yaspeller-ci *.md test/demo/build/api/*.html",
     "clean": "rimraf coverage/ test/demo/build/",
     "lint": "eslint *.js test/{**/,}*.js",
@@ -63,9 +62,13 @@
       }
     }
   },
-  "pre-commit": [
-    "lint-staged"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": [
+        "lint-staged"
+      ]
+    }
+  },
   "lint-staged": {
     "*.md": "yaspeller-ci",
     "*.js": "eslint"
