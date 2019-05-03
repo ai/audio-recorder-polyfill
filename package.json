@@ -21,7 +21,7 @@
     "@logux/eslint-config": "^28.0.0",
     "clean-publish": "^1.1.2",
     "documentation": "^10.1.0",
-    "documentation-theme-light": "^1.0.0",
+    "documentation-theme-light": "^1.0.1",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-es5": "^1.3.1",

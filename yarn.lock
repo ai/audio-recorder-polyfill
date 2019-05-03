@@ -3870,10 +3870,10 @@ doctypes@^1.1.0:
   resolved "https://registry.yarnpkg.com/doctypes/-/doctypes-1.1.0.tgz#ea80b106a87538774e8a3a4a5afe293de489e0a9"
   integrity sha1-6oCxBqh1OHdOijpKWv4pPeSJ4Kk=
 
-documentation-theme-light@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/documentation-theme-light/-/documentation-theme-light-1.0.0.tgz#2a7c6917e584985800e5c1b3432f4a60854fd113"
-  integrity sha512-wp4AO83fUwa332Ae/Cv6seliFlAo+jzcPiXAtwAQ327Ms763VRor73oLcIBtt+mjxh7KSx3uuT8bpfVYc+cd+w==
+documentation-theme-light@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/documentation-theme-light/-/documentation-theme-light-1.0.1.tgz#52dc0451022bf0bff8c76ea8dc1a392df9076e46"
+  integrity sha512-CSVlskgCcmsLVjG2+62FJCWRJYUs79SfbqvZksezYL8Riw3j/vsJZpp/XAjz1AKEnJIVemTuLSZa3kZo5O1xsg==
 
 documentation@^10.1.0:
   version "10.1.0"
