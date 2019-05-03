@@ -78,9 +78,6 @@ MediaRecorder.prototype = {
    * })
    */
   start: function start (timeslice) {
-    /**
-      Create a clone of stream and start recording
-    */
     if (this.state !== 'inactive') {
       return this.em.dispatchEvent(error('start'))
     }
