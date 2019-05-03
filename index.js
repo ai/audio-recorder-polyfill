@@ -128,9 +128,6 @@ MediaRecorder.prototype = {
    * })
    */
   stop: function stop () {
-    /**
-      Stop stream and end cloned stream tracks
-    */
     if (this.state === 'inactive') {
       return this.em.dispatchEvent(error('stop'))
     }
