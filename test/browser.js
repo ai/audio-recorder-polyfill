@@ -4,6 +4,7 @@ class AudioContext {
   createScriptProcessor () {
     return { connect () { } }
   }
+
   createMediaStreamSource () {
     return { connect () { } }
   }
@@ -14,6 +15,7 @@ class MediaStream {
   clone () {
     return this
   }
+
   getTracks () {
     return [
       { stop () { } }
@@ -26,9 +28,11 @@ class Worker {
   constructor (url) {
     this.url = url
   }
+
   addEventListener (type, cb) {
     this.listener = cb
   }
+
   postMessage () { }
 }
 global.Worker = Worker
