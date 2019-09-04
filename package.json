@@ -22,7 +22,7 @@
     "clean-publish": "^1.1.2",
     "documentation": "^12.0.1",
     "documentation-theme-light": "^1.1.0",
-    "eslint": "^6.0.1",
+    "eslint": "^6.3.0",
     "eslint-config-standard": "^13.0.1",
     "eslint-plugin-es5": "^1.4.1",
     "eslint-plugin-import": "^2.18.0",
@@ -137,5 +137,9 @@
       "Mano",
       "floydback"
     ]
+  },
+  "dependencies": {
+    "global": "^4.4.0",
+    "lamejs": "^1.2.0"
   }
 }
