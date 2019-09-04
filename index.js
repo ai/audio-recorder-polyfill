@@ -1,4 +1,3 @@
-var lamejs = require('lamejs')
 var AudioContext = window.AudioContext || window.webkitAudioContext
 
 function createWorker (fn) {
@@ -14,35 +13,6 @@ function error (method) {
   var event = new Event('error')
   event.data = new Error('Wrong state for ' + method)
   return event
-}
-
-function mp3encoder (data) {
-  var channels = 1
-  var sampleRate = 44100
-  var kbps = 128
-  var encoder = new lamejs.Mp3Encoder(channels, sampleRate, kbps)
-  var sampleBlockSize = 1152
-  var mp3Data = []
-  var mp3buf
-
-  data = new Int16Array(data)
-
-  for (var i = 0; i < data.length; i += sampleBlockSize) {
-    var sampleChunk = data.subarray(i, i + sampleBlockSize)
-
-    mp3buf = encoder.encodeBuffer(sampleChunk)
-    if (mp3buf.length > 0) {
-      mp3Data.push(mp3buf)
-    }
-  }
-
-  mp3buf = encoder.flush()
-
-  if (mp3buf.length > 0) {
-    mp3Data.push(new Int8Array(mp3buf))
-  }
-
-  return new Blob(mp3Data, { type: 'audio/mp3' })
 }
 
 var context, processor
@@ -79,7 +49,7 @@ function MediaRecorder (stream) {
   this.encoder.addEventListener('message', function (e) {
     var event = new Event('dataavailable')
 
-    event.data = mp3encoder(e.data)
+    event.data = e.data
     recorder.em.dispatchEvent(event)
     if (recorder.state === 'inactive') {
       recorder.em.dispatchEvent(new Event('stop'))

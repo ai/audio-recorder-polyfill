@@ -139,7 +139,6 @@
     ]
   },
   "dependencies": {
-    "global": "^4.4.0",
-    "lamejs": "^1.2.0"
+    "global": "^4.4.0"
   }
 }
