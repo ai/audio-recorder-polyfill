@@ -27,7 +27,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 [MediaRecorder]: https://developers.google.com/web/updates/2016/01/mediarecorder
 [online demo]:   https://ai.github.io/audio-recorder-polyfill/
 [Size Limit]:    https://github.com/ai/size-limit
-[API]:           https://ai.github.io/audio-recorder-polyfill/api/MediaRecorder.html
+[API]:           https://ai.github.io/audio-recorder-polyfill/api/
 
 <a href="https://evilmartians.com/?utm_source=audio-recorder-polyfill">
   <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
