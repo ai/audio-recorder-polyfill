@@ -71,7 +71,7 @@
     }
   },
   "lint-staged": {
-    "*.md": "yaspeller-ci",
+    "*.md": "yaspeller",
     "*.js": "eslint"
   },
   "size-limit": [
