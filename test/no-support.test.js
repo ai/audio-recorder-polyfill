@@ -1,5 +1,5 @@
 let MediaRecorder = require('../')
 
 it('detects support', () => {
-  expect(MediaRecorder.notSupported).toBeTruthy()
+  expect(MediaRecorder.notSupported).toBe(true)
 })

@@ -41,8 +41,8 @@ beforeEach(() => {
 })
 
 it('checks audio format support', () => {
-  expect(MediaRecorder.isTypeSupported('audio/wav')).toBeTruthy()
-  expect(MediaRecorder.isTypeSupported('audio/webm')).toBeFalsy()
+  expect(MediaRecorder.isTypeSupported('audio/wav')).toBe(true)
+  expect(MediaRecorder.isTypeSupported('audio/webm')).toBe(false)
 })
 
 it('saves stream', () => {
@@ -132,7 +132,7 @@ it('shows used MIME type', () => {
 })
 
 it('detects support', () => {
-  expect(MediaRecorder.notSupported).toBeFalsy()
+  expect(MediaRecorder.notSupported).toBe(false)
 })
 
 it('allow to request captured data', async () => {

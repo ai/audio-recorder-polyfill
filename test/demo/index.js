@@ -1,13 +1,13 @@
-var EVENTS = ['start', 'stop', 'pause', 'resume']
-var TYPES = ['audio/webm', 'audio/ogg', 'audio/wav']
+let EVENTS = ['start', 'stop', 'pause', 'resume']
+let TYPES = ['audio/webm', 'audio/ogg', 'audio/wav']
 
-var recorder, list, recordFull, recordParts, pause, resume, stop, request
+let recorder, list, recordFull, recordParts, pause, resume, stop, request
 
 const KB = 1 << 10
 const MB = 1 << 20
 
 function bytes (value) {
-  var mag = Math.abs(value)
+  let mag = Math.abs(value)
 
   let unit
   if (mag >= MB) {
@@ -25,10 +25,10 @@ function bytes (value) {
 
 function startRecording (type) {
   list.innerHTML = ''
-  navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     recorder = new MediaRecorder(stream)
 
-    EVENTS.forEach(function (name) {
+    EVENTS.forEach(name => {
       recorder.addEventListener(name, changeState.bind(null, name))
     })
     recorder.addEventListener('dataavailable', saveRecord)
@@ -65,17 +65,17 @@ function requestData () {
 }
 
 function saveRecord (e) {
-  var li = document.createElement('li')
+  let li = document.createElement('li')
 
-  var strong = document.createElement('strong')
+  let strong = document.createElement('strong')
   strong.innerText = 'dataavailable: '
   li.appendChild(strong)
 
-  var s = document.createElement('span')
+  let s = document.createElement('span')
   s.innerText = e.data.type + ', ' + bytes(e.data.size)
   li.appendChild(s)
 
-  var audio = document.createElement('audio')
+  let audio = document.createElement('audio')
   audio.controls = true
   audio.src = URL.createObjectURL(e.data)
   li.appendChild(audio)
@@ -84,7 +84,7 @@ function saveRecord (e) {
 }
 
 function changeState (eventName) {
-  var li = document.createElement('li')
+  let li = document.createElement('li')
   li.innerHTML = '<strong>' + eventName + ': </strong>' + recorder.state
   if (eventName === 'start') {
     li.innerHTML += ', ' + recorder.mimeType
@@ -132,7 +132,7 @@ if (MediaRecorder.notSupported) {
   document.getElementById('support').style.display = 'block'
 } else {
   document.getElementById('formats').innerText = 'Format: ' +
-    TYPES.filter(function (i) {
+    TYPES.filter(i => {
       return MediaRecorder.isTypeSupported(i)
     }).join(', ')
 

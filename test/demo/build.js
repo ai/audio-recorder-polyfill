@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var { promisify } = require('util')
+let { promisify } = require('util')
 let posthtml = require('posthtml')
 let Bundler = require('parcel-bundler')
 let path = require('path')

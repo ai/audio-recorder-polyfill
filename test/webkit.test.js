@@ -4,7 +4,7 @@ delete global.AudioContext
 let MediaRecorder = require('../')
 
 it('detects support', () => {
-  expect(MediaRecorder.notSupported).toBeFalsy()
+  expect(MediaRecorder.notSupported).toBe(false)
 })
 
 it('uses audio context with prefix', () => {
