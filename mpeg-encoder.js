@@ -1,12 +1,12 @@
 module.exports = function () {
-  // eslint-disable-next-line
-  importScripts('https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js')
+  importScripts(
+    'https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js'
+  )
 
   var CHANNELS = 1
   var KBPS = 128
   var SAMPLE_RATE = 44100
 
-  // eslint-disable-next-line
   var encoder = new lamejs.Mp3Encoder(CHANNELS, SAMPLE_RATE, KBPS)
   var recorded = new Int8Array()
 

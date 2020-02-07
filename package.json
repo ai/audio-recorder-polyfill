@@ -85,7 +85,9 @@
   "eslintConfig": {
     "extends": "@logux/eslint-config/browser",
     "globals": {
-      "onmessage": true
+      "importScripts": false,
+      "onmessage": true,
+      "lamejs": false
     },
     "overrides": [
       {
