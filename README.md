@@ -9,7 +9,7 @@ Try it in **[online demo]** and see **[API]**.
 
 * **Spec compatible.** In the future when all browsers will support
   MediaRecorder, you will remove polyfill.
-* **Small.** 1.2 KB (minified and gzipped). No dependencies.
+* **Small.** 1.1 KB (minified and gzipped). No dependencies.
   It uses [Size Limit] to control size.
 * **One file.** In contrast to other recorders, this polyfill uses
   “inline worker” and don’t need a separated file for Web Worker.
