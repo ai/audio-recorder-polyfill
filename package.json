@@ -12,7 +12,8 @@
     "webrtc",
     "audio",
     "web audio api",
-    "recorder"
+    "recorder",
+    "mp3"
   ],
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
