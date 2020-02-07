@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2
+* Add MP3 encoder (by @youkaclub).
+
 ## 0.1.6
 * Allow to record after calling `stop()` (by @floydback).
 
