@@ -9,10 +9,11 @@ Try it in **[online demo]** and see **[API]**.
 
 * **Spec compatible.** In the future when all browsers will support
   MediaRecorder, you will remove polyfill.
-* **Small.** 1.1 KB (minified and gzipped). No dependencies.
+* **Small.** 1.2 KB (minified and gzipped). No dependencies.
   It uses [Size Limit] to control size.
 * **One file.** In contrast to other recorders, this polyfill uses
   “inline worker” and don’t need a separated file for Web Worker.
+* **MP3** and **WAV** encoder support.
 
 ```js
 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
@@ -131,9 +132,6 @@ recorder.start(1000)
 
 Chrome records natively only to `.webm` files. Firefox to `.ogg`.
 
-This polyfill saves records to `.wav` files. Compression
-is not very good, but encoding is fast and simple.
-
 You can get used file format in `e.data.type`:
 
 ```js
@@ -142,6 +140,18 @@ recorder.addEventListener('dataavailable', e => {
               //   'audio/webm' in Chrome
               //   'audio/ogg' in Firefox
 })
+```
+
+### WAV
+As default ,this polyfill saves records to `.wav` files. Compression
+is not very good, but encoding is fast and simple.
+
+### MP3
+For better compression you may use the MP3 encoder.
+```js
+MediaRecorder = require('audio-recorder-polyfill')
+MediaRecorder.encoder = require('audio-recorder-polyfill/mpeg-encoder')
+MediaRecorder.prototype.mimeType = 'audio/mpeg'
 ```
 
 ## Limitations
@@ -165,7 +175,7 @@ you can change polyfill’s encoder:
 ```diff
   window.MediaRecorder = require('audio-recorder-polyfill')
 + MediaRecorder.encoder = require('./ogg-opus-encoder')
-+ MediaRecorder.mimeType = 'audio/ogg'
++ MediaRecorder.prototype.mimeType = 'audio/ogg'
 ```
 
 The encoder should be a function with Web Worker in the body.

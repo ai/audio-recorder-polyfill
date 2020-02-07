@@ -242,14 +242,14 @@ MediaRecorder.prototype = {
 /**
  * Returns `true` if the MIME type specified is one the polyfill can record.
  *
- * This polyfill supports only `audio/wav`.
+ * This polyfill supports `audio/wav` and `audio/mpeg`.
  *
  * @param {string} mimeType The mimeType to check.
  *
- * @return {boolean} `true` on `audio/wav` MIME type.
+ * @return {boolean} `true` on `audio/wav` and `audio/mpeg` MIME type.
  */
 MediaRecorder.isTypeSupported = function isTypeSupported (mimeType) {
-  return /audio\/wave?/.test(mimeType)
+  return MediaRecorder.prototype.mimeType === mimeType
 }
 
 /**
