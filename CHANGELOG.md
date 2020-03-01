@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3
+* Add ES modules support.
+* Use ES2016 syntax.
+
 ## 0.2
 * Add MP3 encoder (by @youkaclub).
 
