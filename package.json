@@ -129,7 +129,11 @@
       "Thu",
       "Fri",
       "Feb",
-      "MP3"
+      "MP3",
+      "supports ES",
+      "bundlers",
+      "CDN",
+      "ES"
     ]
   }
 }

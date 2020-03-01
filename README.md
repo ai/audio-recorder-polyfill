@@ -76,6 +76,19 @@ without MediaRecorder support:
 ```
 
 
+## ES Modules
+
+Polyfill supports ES modules. You do not need to do anything for bundlers.
+
+For quick hacks you can load polyfill from CDN. Do not use it in production
+because of low performance.
+
+```js
+import AudioRecorder from 'https://cdn.jsdelivr.net/npm/audio-recorder-polyfill/index.js'
+window.MediaRecorder = AudioRecorder
+```
+
+
 ## Usage
 
 In the beginning, we need to show a warning in browsers without Web Audio API:
