@@ -1,16 +1,16 @@
 // Copied from https://github.com/chris-rudmin/Recorderjs
 
-module.exports = function () {
-  var BYTES_PER_SAMPLE = 2
+module.exports = () => {
+  let BYTES_PER_SAMPLE = 2
 
-  var recorded = []
+  let recorded = []
 
   function encode (buffer) {
-    var length = buffer.length
-    var data = new Uint8Array(length * BYTES_PER_SAMPLE)
-    for (var i = 0; i < length; i++) {
-      var index = i * BYTES_PER_SAMPLE
-      var sample = buffer[i]
+    let length = buffer.length
+    let data = new Uint8Array(length * BYTES_PER_SAMPLE)
+    for (let i = 0; i < length; i++) {
+      let index = i * BYTES_PER_SAMPLE
+      let sample = buffer[i]
       if (sample > 1) {
         sample = 1
       } else if (sample < -1) {
@@ -24,10 +24,10 @@ module.exports = function () {
   }
 
   function dump (sampleRate) {
-    var bufferLength = recorded.length ? recorded[0].length : 0
-    var length = recorded.length * bufferLength
-    var wav = new Uint8Array(44 + length)
-    var view = new DataView(wav.buffer)
+    let bufferLength = recorded.length ? recorded[0].length : 0
+    let length = recorded.length * bufferLength
+    let wav = new Uint8Array(44 + length)
+    let view = new DataView(wav.buffer)
 
     // RIFF identifier 'RIFF'
     view.setUint32(0, 1380533830, false)
@@ -56,15 +56,15 @@ module.exports = function () {
     // data chunk length
     view.setUint32(40, length, true)
 
-    for (var i = 0; i < recorded.length; i++) {
-      wav.set(recorded[i], i * bufferLength + 44)
+    for (let [i, element] of recorded.entries()) {
+      wav.set(element, i * bufferLength + 44)
     }
 
     recorded = []
     postMessage(wav.buffer, [wav.buffer])
   }
 
-  onmessage = function (e) {
+  onmessage = e => {
     if (e.data[0] === 'encode') {
       encode(e.data[1])
     } else {

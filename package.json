@@ -15,11 +15,21 @@
     "recorder",
     "mp3"
   ],
+  "scripts": {
+    "spell": "yaspeller-ci *.md test/demo/build/api/*.html",
+    "clean": "rimraf coverage/ test/demo/build/",
+    "lint": "eslint *.js test/{**/,}*.js",
+    "api": "documentation build -o test/demo/build/api/ -f html --theme node_modules/documentation-theme-light *.js",
+    "unit": "jest --coverage",
+    "test": "yarn unit && yarn lint && size-limit && yarn build && yarn spell",
+    "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
+    "build": "yarn clean && yarn api && NODE_ENV=production node ./test/demo/build.js"
+  },
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
   "repository": "ai/audio-recorder-polyfill",
   "devDependencies": {
-    "@logux/eslint-config": "^35.0.4",
+    "@logux/eslint-config": "^36.0.0",
     "@size-limit/preset-small-lib": "^4.0.2",
     "clean-publish": "^1.1.5",
     "documentation": "^12.1.4",
@@ -49,16 +59,6 @@
     "size-limit": "^4.0.2",
     "yaspeller-ci": "^1.0.2"
   },
-  "scripts": {
-    "spell": "yaspeller-ci *.md test/demo/build/api/*.html",
-    "clean": "rimraf coverage/ test/demo/build/",
-    "lint": "eslint *.js test/{**/,}*.js",
-    "api": "documentation build -o test/demo/build/api/ -f html --theme node_modules/documentation-theme-light *.js",
-    "unit": "jest --coverage",
-    "test": "yarn unit && yarn lint && size-limit && yarn build && yarn spell",
-    "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
-    "build": "yarn clean && yarn api && NODE_ENV=production node ./test/demo/build.js"
-  },
   "jest": {
     "coverageThreshold": {
       "global": {
@@ -84,28 +84,15 @@
     }
   ],
   "eslintConfig": {
-    "extends": "@logux/eslint-config/browser",
+    "extends": "@logux/eslint-config",
+    "rules": {
+      "node/no-unsupported-features/node-builtins": "off"
+    },
     "globals": {
       "importScripts": false,
       "onmessage": true,
       "lamejs": false
-    },
-    "overrides": [
-      {
-        "files": [
-          "test/**/*"
-        ],
-        "rules": {
-          "es5/no-shorthand-properties": "off",
-          "es5/no-arrow-functions": "off",
-          "es5/no-destructuring": "off",
-          "es5/no-block-scoping": "off",
-          "es5/no-es6-methods": "off",
-          "es5/no-classes": "off",
-          "es5/no-spread": "off"
-        }
-      }
-    ]
+    }
   },
   "yaspeller": {
     "lang": "en",

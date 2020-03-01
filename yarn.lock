@@ -1186,10 +1186,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@logux/eslint-config@^35.0.4":
-  version "35.0.4"
-  resolved "https://registry.yarnpkg.com/@logux/eslint-config/-/eslint-config-35.0.4.tgz#2fc1b5ea8b12df1c02f25559b6e21f2f5c98c685"
-  integrity sha512-gpfIOySP7h2Te8zta3Mh0jRiP1hAHLVDZ0sOG1fzJmAm8bxScq2Itlb0rTDxxDgHTmP1G5kH4PKvwHU47JCtVA==
+"@logux/eslint-config@^36.0.0":
+  version "36.0.0"
+  resolved "https://registry.yarnpkg.com/@logux/eslint-config/-/eslint-config-36.0.0.tgz#4e9104362914119c8b0c6e0fcae5d2ef6ae2a72b"
+  integrity sha512-qxUJXdZJ+Z9roXxZaRG5ZyQPC3BhByNT1qQNZWwDYddDMZ3tnIf5NE+dbpURGI5J1rKWsVYRB2QbR52Vr/CNsw==
   dependencies:
     globals "^12.3.0"
 

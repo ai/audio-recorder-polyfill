@@ -35,6 +35,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
        alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
 
+
 ## Install
 
 Install package:
@@ -73,6 +74,7 @@ without MediaRecorder support:
 +   </script>
     <script src="/app.js" defer></script>
 ```
+
 
 ## Usage
 
@@ -128,6 +130,7 @@ recorder.start(1000)
 
 [API]: https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
 
+
 ## Audio Formats
 
 Chrome records natively only to `.webm` files. Firefox to `.ogg`.
@@ -142,17 +145,22 @@ recorder.addEventListener('dataavailable', e => {
 })
 ```
 
+
 ### WAV
+
 As default ,this polyfill saves records to `.wav` files. Compression
 is not very good, but encoding is fast and simple.
 
+
 ### MP3
+
 For better compression you may use the MP3 encoder.
 ```js
 MediaRecorder = require('audio-recorder-polyfill')
 MediaRecorder.encoder = require('audio-recorder-polyfill/mpeg-encoder')
 MediaRecorder.prototype.mimeType = 'audio/mpeg'
 ```
+
 
 ## Limitations
 
@@ -166,6 +174,7 @@ But it still has small differences.
   to the same file.
 * Constructor options are not supported.
 * `BlobEvent.timecode` is not supported.
+
 
 ## Custom Encoder
 

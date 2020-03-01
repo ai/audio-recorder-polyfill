@@ -6,8 +6,8 @@ beforeEach(() => {
   global.postMessage = msg => {
     let from = new Uint8Array(msg)
     let array = []
-    for (let i = 0; i < from.length; i++) {
-      array.push(from[i])
+    for (let i of from) {
+      array.push(i)
     }
     messages.push(array)
   }
