@@ -58,7 +58,8 @@ Good browsers will download less.
 Install polyfill as MediaRecorder in this new bundle `src/polyfill.js`:
 
 ```js
-window.MediaRecorder = require('audio-recorder-polyfill')
+import AudioRecorder from 'audio-recorder-polyfill'
+window.MediaRecorder = AudioRecorder
 ```
 
 Add this code to your HTML to load this new bundle only for browsers
@@ -168,10 +169,14 @@ is not very good, but encoding is fast and simple.
 ### MP3
 
 For better compression you may use the MP3 encoder.
+
 ```js
-MediaRecorder = require('audio-recorder-polyfill')
-MediaRecorder.encoder = require('audio-recorder-polyfill/mpeg-encoder')
-MediaRecorder.prototype.mimeType = 'audio/mpeg'
+import AudioRecorder from 'audio-recorder-polyfill'
+import mpegEncoder from './ogg-opus-encoder'
+
+AudioRecorder.encoder = mpegEncoder
+AudioRecorder.prototype.mimeType = 'audio/mpeg'
+window.MediaRecorder = AudioRecorder
 ```
 
 
@@ -195,16 +200,19 @@ If you need audio format with better compression,
 you can change polyfill’s encoder:
 
 ```diff
-  window.MediaRecorder = require('audio-recorder-polyfill')
-+ MediaRecorder.encoder = require('./ogg-opus-encoder')
-+ MediaRecorder.prototype.mimeType = 'audio/ogg'
+  import AudioRecorder from 'audio-recorder-polyfill'
++ import customEncoder from './ogg-opus-encoder'
++
++ AudioRecorder.encoder = customEncoder
++ AudioRecorder.prototype.mimeType = 'audio/ogg'
+  window.MediaRecorder = AudioRecorder
 ```
 
 The encoder should be a function with Web Worker in the body.
 Polyfill converts function to the string to make Web Worker.
 
 ```js
-module.exports = function () {
+module.exports = () => {
   function encode (input) {
     …
   }
@@ -214,7 +222,7 @@ module.exports = function () {
     postMessage(output)
   }
 
-  onmessage = function (e) {
+  onmessage = e => {
     if (e.data[0] === 'encode') {
       encode(e.data[1])
     } else {

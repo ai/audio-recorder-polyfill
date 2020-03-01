@@ -23,8 +23,8 @@ let context, processor
  * Audio Recorder with MediaRecorder API.
  *
  * @example
- * navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
- *   var recorder = new MediaRecorder(stream)
+ * navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+ *   let recorder = new MediaRecorder(stream)
  * })
  */
 class MediaRecorder {
@@ -68,7 +68,7 @@ class MediaRecorder {
    * @return {undefined}
    *
    * @example
-   * recordButton.addEventListener('click', function () {
+   * recordButton.addEventListener('click', () => {
    *   recorder.start()
    * })
    */
@@ -118,7 +118,7 @@ class MediaRecorder {
    * @return {undefined}
    *
    * @example
-   * finishButton.addEventListener('click', function () {
+   * finishButton.addEventListener('click', () => {
    *   recorder.stop()
    * })
    */
@@ -141,7 +141,7 @@ class MediaRecorder {
    * @return {undefined}
    *
    * @example
-   * pauseButton.addEventListener('click', function () {
+   * pauseButton.addEventListener('click', () => {
    *   recorder.pause()
    * })
    */
@@ -160,7 +160,7 @@ class MediaRecorder {
    * @return {undefined}
    *
    * @example
-   * resumeButton.addEventListener('click', function () {
+   * resumeButton.addEventListener('click', () => {
    *   recorder.resume()
    * })
    */
@@ -179,7 +179,7 @@ class MediaRecorder {
    * @return {undefined}
    *
    * @example
-   * this.on('nextData', function () {
+   * this.on('nextData', () => {
    *   recorder.requestData()
    * })
    */
@@ -201,7 +201,7 @@ class MediaRecorder {
    * @return {undefined}
    *
    * @example
-   * recorder.addEventListener('dataavailable', function (e) {
+   * recorder.addEventListener('dataavailable', e => {
    *   audio.src = URL.createObjectURL(e.data)
    * })
    */
