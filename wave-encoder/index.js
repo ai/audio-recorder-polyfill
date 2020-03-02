@@ -56,8 +56,9 @@ module.exports = () => {
     // data chunk length
     view.setUint32(40, length, true)
 
-    for (let [i, element] of recorded.entries()) {
-      wav.set(element, i * bufferLength + 44)
+    // eslint-disable-next-line unicorn/no-for-loop
+    for (let i = 0; i < recorded.length; i++) {
+      wav.set(recorded[i], i * bufferLength + 44)
     }
 
     recorded = []
