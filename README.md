@@ -162,7 +162,7 @@ recorder.addEventListener('dataavailable', e => {
 
 ### WAV
 
-As default ,this polyfill saves records to `.wav` files. Compression
+As default, this polyfill saves records to `.wav` files. Compression
 is not very good, but encoding is fast and simple.
 
 
@@ -172,7 +172,7 @@ For better compression you may use the MP3 encoder.
 
 ```js
 import AudioRecorder from 'audio-recorder-polyfill'
-import mpegEncoder from './ogg-opus-encoder'
+import mpegEncoder from 'audio-recorder-polyfill/mpeg-encoder'
 
 AudioRecorder.encoder = mpegEncoder
 AudioRecorder.prototype.mimeType = 'audio/mpeg'
