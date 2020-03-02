@@ -19,8 +19,7 @@
     "spell": "yaspeller-ci *.md test/demo/build/api/*.html",
     "clean": "rimraf coverage/ test/demo/build/",
     "api": "documentation build -o test/demo/build/api/ -f html --theme node_modules/documentation-theme-light *.js",
-    "unit": "jest --coverage",
-    "test": "yarn unit && eslint . && size-limit && yarn build && yarn spell",
+    "test": "jest --coverage && eslint . && size-limit && yarn build && yarn spell",
     "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
     "build": "yarn clean && yarn api && NODE_ENV=production node ./test/demo/build.js"
   },
@@ -32,7 +31,7 @@
     "@size-limit/preset-small-lib": "^4.0.2",
     "documentation": "^12.1.4",
     "documentation-theme-light": "^1.1.1",
-    "dual-publish": "^0.2.0",
+    "dual-publish": "^0.3.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-es5": "^1.5.0",
