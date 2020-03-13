@@ -5,7 +5,7 @@ let AudioContext = window.AudioContext || window.webkitAudioContext
 function createWorker (fn) {
   let js = fn
     .toString()
-    .replace(/^function\s*\(\)\s*{/, '')
+    .replace(/^(\(\)\s+=>|function\s*\(\))\s*{/, '')
     .replace(/}$/, '')
   let blob = new Blob([js])
   return new Worker(URL.createObjectURL(blob))
