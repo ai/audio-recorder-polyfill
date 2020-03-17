@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.4
+* Better fix for `createWorker` error (by @jiyonghong).
+
 ## 0.3.3
 * Fix `createWorker` error.
 
