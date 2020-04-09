@@ -228,3 +228,17 @@ it('allows to change encoder', () => {
   recorder = new MediaRecorder()
   expect(recorder.encoder.url.size).toEqual(7)
 })
+
+it('sends the AudioContext sample rate in the initialize method', () => {
+  AudioContext.prototype.sampleRate = 8000
+  let recorder = new MediaRecorder(new MediaStream())
+  let calls = 0
+  recorder.encoder.postMessage = data => {
+    if (data[0] === 'initialize') {
+      expect(data[1]).toEqual(8000)
+      calls += 1
+    }
+  }
+  recorder.start()
+  expect(calls).toEqual(1)
+})
