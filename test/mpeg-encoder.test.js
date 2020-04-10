@@ -19,7 +19,7 @@ beforeEach(() => {
 })
 
 it('encodes data to MPEG', () => {
-  onmessage({ data: ['initialize'] })
+  onmessage({ data: ['init'] })
   onmessage({ data: ['encode', [0.5]] })
   onmessage({ data: ['encode', [2]] })
   onmessage({ data: ['encode', [-3]] })
@@ -71,7 +71,7 @@ it('encodes data to MPEG', () => {
 })
 
 it('allow to call dump multiple times', () => {
-  onmessage({ data: ['initialize', 44100] })
+  onmessage({ data: ['init', 44100] })
   onmessage({ data: ['encode', [0.5]] })
   onmessage({ data: ['encode', [2]] })
   onmessage({ data: ['dump', 44100] })
@@ -86,7 +86,7 @@ it('allow to call dump multiple times', () => {
 })
 
 it('encodes using the sample rate provided by initialize', () => {
-  onmessage({ data: ['initialize', 16000] })
+  onmessage({ data: ['init', 16000] })
   onmessage({ data: ['encode', [0.5]] })
   onmessage({ data: ['encode', [2]] })
   onmessage({ data: ['encode', [-3]] })

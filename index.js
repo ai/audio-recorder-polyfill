@@ -91,7 +91,7 @@ class MediaRecorder {
 
     let recorder = this
 
-    recorder.encoder.postMessage(['initialize', context.sampleRate])
+    recorder.encoder.postMessage(['init', context.sampleRate])
 
     processor.onaudioprocess = function (e) {
       if (recorder.state === 'recording') {

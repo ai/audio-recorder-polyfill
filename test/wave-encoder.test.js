@@ -13,7 +13,7 @@ beforeEach(() => {
   }
   global.onmessage = undefined
   waveEncoder()
-  onmessage({ data: ['initialize'] })
+  onmessage({ data: ['init'] })
 })
 
 it('encodes data to WAVE', () => {

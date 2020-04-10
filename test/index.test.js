@@ -234,7 +234,7 @@ it('sends the AudioContext sample rate in the initialize method', () => {
   let recorder = new MediaRecorder(new MediaStream())
   let calls = 0
   recorder.encoder.postMessage = data => {
-    if (data[0] === 'initialize') {
+    if (data[0] === 'init') {
       expect(data[1]).toEqual(8000)
       calls += 1
     }

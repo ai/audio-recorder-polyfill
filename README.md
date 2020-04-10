@@ -213,7 +213,7 @@ Polyfill converts function to the string to make Web Worker.
 
 ```js
 module.exports = () => {
-  function initialize (sampleRate) {
+  function init (sampleRate) {
     …
   }
 
@@ -227,8 +227,8 @@ module.exports = () => {
   }
 
   onmessage = e => {
-    if (e.data[0] === 'initialize') {
-      initialize(e.data[1])
+    if (e.data[0] === 'init') {
+      init(e.data[1])
     } else if (e.data[0] === 'encode') {
       encode(e.data[1])
     } else if (e.data[0] === 'dump') {

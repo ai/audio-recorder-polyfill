@@ -20,10 +20,12 @@ module.exports = () => {
     return c
   }
 
-  function initialize (sampleRate) {
-    encoder = new lamejs.Mp3Encoder(CHANNELS,
+  function init (sampleRate) {
+    encoder = new lamejs.Mp3Encoder(
+      CHANNELS,
       sampleRate || DEFAULT_SAMPLE_RATE,
-      KBPS)
+      KBPS
+    )
   }
 
   function encode (buffer) {
@@ -44,8 +46,8 @@ module.exports = () => {
   }
 
   onmessage = e => {
-    if (e.data[0] === 'initialize') {
-      initialize(e.data[1])
+    if (e.data[0] === 'init') {
+      init(e.data[1])
     } else if (e.data[0] === 'encode') {
       encode(e.data[1])
     } else {
