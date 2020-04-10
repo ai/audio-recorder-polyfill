@@ -68,7 +68,7 @@ module.exports = () => {
   onmessage = e => {
     if (e.data[0] === 'encode') {
       encode(e.data[1])
-    } else {
+    } else if (e.data[0] === 'dump') {
       dump(e.data[1])
     }
   }

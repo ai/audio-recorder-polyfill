@@ -5,9 +5,9 @@ module.exports = () => {
 
   let CHANNELS = 1
   let KBPS = 128
-  let SAMPLE_RATE = 44100
+  let DEFAULT_SAMPLE_RATE = 44100
 
-  let encoder = new lamejs.Mp3Encoder(CHANNELS, SAMPLE_RATE, KBPS)
+  let encoder
   let recorded = new Int8Array()
 
   function concat (a, b) {
@@ -18,6 +18,12 @@ module.exports = () => {
     c.set(a)
     c.set(b, a.length)
     return c
+  }
+
+  function initialize (sampleRate) {
+    encoder = new lamejs.Mp3Encoder(CHANNELS,
+      sampleRate || DEFAULT_SAMPLE_RATE,
+      KBPS)
   }
 
   function encode (buffer) {
@@ -38,7 +44,9 @@ module.exports = () => {
   }
 
   onmessage = e => {
-    if (e.data[0] === 'encode') {
+    if (e.data[0] === 'initialize') {
+      initialize(e.data[1])
+    } else if (e.data[0] === 'encode') {
       encode(e.data[1])
     } else {
       dump(e.data[1])
