@@ -10,3 +10,4 @@ coverage/
 api/
 *.svg
 .cache
+*.test.js
