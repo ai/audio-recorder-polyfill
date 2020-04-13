@@ -83,7 +83,7 @@ class MediaRecorder {
       context = new AudioContext()
     }
     this.clone = this.stream.clone()
-    let input = context.createMediaStreamSource(this.clone)
+    this.input = context.createMediaStreamSource(this.clone)
 
     if (!processor) {
       processor = context.createScriptProcessor(2048, 1, 1)
@@ -101,7 +101,7 @@ class MediaRecorder {
       }
     }
 
-    input.connect(processor)
+    this.input.connect(processor)
     processor.connect(context.destination)
 
     this.em.dispatchEvent(new Event('start'))
@@ -135,6 +135,7 @@ class MediaRecorder {
     this.clone.getTracks().forEach(track => {
       track.stop()
     })
+    this.input.disconnect();
     return clearInterval(this.slicing)
   }
 
