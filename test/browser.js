@@ -1,12 +1,21 @@
 navigator.mediaDevices = { }
 
+class AudioNode {
+  connect () { }
+
+  disconnect () { }
+}
+
+class ScriptProcessorNode extends AudioNode {}
+class MediaStreamAudioSourceNode extends AudioNode {}
+
 class AudioContext {
   createScriptProcessor () {
-    return { connect () { } }
+    return new ScriptProcessorNode()
   }
 
   createMediaStreamSource () {
-    return { connect () { } }
+    return new MediaStreamAudioSourceNode()
   }
 }
 global.AudioContext = AudioContext

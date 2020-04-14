@@ -135,9 +135,7 @@ class MediaRecorder {
     this.clone.getTracks().forEach(track => {
       track.stop()
     })
-    if (this.input && typeof this.input === 'function') {
-      this.input.disconnect();
-    }
+    this.input.disconnect()
     return clearInterval(this.slicing)
   }
 
