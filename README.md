@@ -48,7 +48,7 @@ We recommend creating separated webpack/Parcel bundle with polyfill.
 In this case, polyfill will be downloaded only by Edge and Safari.
 Good browsers will download less.
 
-We recommend you to use the polyfills even when the browser nativetely supports `MediaRecorder` (like Chrome) in order to make the recorded data play on every browser.
+We recommend you to use the polyfill even when the browser nativetely supports `MediaRecorder` (like Chrome) in order to make the recorded data play on every browser.
 
 ```diff
   entry: {
