@@ -48,7 +48,11 @@ We recommend creating separated webpack/Parcel bundle with polyfill.
 In this case, polyfill will be downloaded only by Edge and Safari.
 Good browsers will download less.
 
-Files recorded without the polyfill will not be playable on Safari, it is highly recommended to convert it to mp3 on the backend of your application, if that's not an option you can use the polyfill in all browsers to force the audio to be converted to the right format with the price of client's performance
+Files recorded without the polyfill will not be playable on Safari,
+it is highly recommended to convert it to MP3 on the backend
+of your application. If that’s not an option you can use the polyfill
+in all browsers to force the audio to be converted to the right format
+with the price of client’s performance.
 
 ```diff
   entry: {
