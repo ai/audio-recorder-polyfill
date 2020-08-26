@@ -76,7 +76,7 @@ without MediaRecorder support:
     <script src="/app.js" defer></script>
 ```
 
-If you want to make sure that the audio recorded on chrome (or any other browser that has the `MediaRecorder`  API) plays on Safari, you should always use the polyfill instead of native API
+If you want to make sure that the audio recorded on Chrome (or any other browser that has the `MediaRecorder`  API) plays on Safari, you should always use the polyfill instead of native API
 
 ## ES Modules
 
