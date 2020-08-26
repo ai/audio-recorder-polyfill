@@ -48,6 +48,8 @@ We recommend creating separated webpack/Parcel bundle with polyfill.
 In this case, polyfill will be downloaded only by Edge and Safari.
 Good browsers will download less.
 
+We recommend you to use the polyfills even when the browser nativetely supports `MediaRecorder` (like Chrome) in order to make the recorded data play on every browser.
+
 ```diff
   entry: {
     app: './src/app.js',
@@ -75,8 +77,6 @@ without MediaRecorder support:
 +   </script>
     <script src="/app.js" defer></script>
 ```
-
-If you want to make sure that the audio recorded on Chrome (or any other browser that has the `MediaRecorder`  API) plays on Safari, you should always use the polyfill instead of native API
 
 ## ES Modules
 
