@@ -51,9 +51,9 @@ class MediaRecorder {
     this.encoder.addEventListener('message', e => {
       let event = new Event('dataavailable')
       event.data = new Blob([e.data], { type: recorder.mimeType })
-      recorder.em.dispatchEvent(event)
+      recorder.dispatchEvent(event)
       if (recorder.state === 'inactive') {
-        recorder.em.dispatchEvent(new Event('stop'))
+        recorder.dispatchEvent(new Event('stop'))
       }
     })
   }
@@ -74,7 +74,7 @@ class MediaRecorder {
    */
   start (timeslice) {
     if (this.state !== 'inactive') {
-      return this.em.dispatchEvent(error('start'))
+      return this.dispatchEvent(error('start'))
     }
 
     this.state = 'recording'
@@ -104,7 +104,7 @@ class MediaRecorder {
     this.input.connect(processor)
     processor.connect(context.destination)
 
-    this.em.dispatchEvent(new Event('start'))
+    this.dispatchEvent(new Event('start'))
 
     if (timeslice) {
       this.slicing = setInterval(() => {
@@ -127,7 +127,7 @@ class MediaRecorder {
    */
   stop () {
     if (this.state === 'inactive') {
-      return this.em.dispatchEvent(error('stop'))
+      return this.dispatchEvent(error('stop'))
     }
 
     this.requestData()
@@ -151,11 +151,11 @@ class MediaRecorder {
    */
   pause () {
     if (this.state !== 'recording') {
-      return this.em.dispatchEvent(error('pause'))
+      return this.dispatchEvent(error('pause'))
     }
 
     this.state = 'paused'
-    return this.em.dispatchEvent(new Event('pause'))
+    return this.dispatchEvent(new Event('pause'))
   }
 
   /**
@@ -170,11 +170,11 @@ class MediaRecorder {
    */
   resume () {
     if (this.state !== 'paused') {
-      return this.em.dispatchEvent(error('resume'))
+      return this.dispatchEvent(error('resume'))
     }
 
     this.state = 'recording'
-    return this.em.dispatchEvent(new Event('resume'))
+    return this.dispatchEvent(new Event('resume'))
   }
 
   /**
@@ -189,7 +189,7 @@ class MediaRecorder {
    */
   requestData () {
     if (this.state === 'inactive') {
-      return this.em.dispatchEvent(error('requestData'))
+      return this.dispatchEvent(error('requestData'))
     }
 
     return this.encoder.postMessage(['dump', context.sampleRate])
