@@ -56,6 +56,23 @@ class MediaRecorder {
         recorder.em.dispatchEvent(new Event('stop'))
       }
     })
+
+    let _handlers = {};
+    ['start', 'stop', 'pause', 'resume', 'dataavailable', 'error'].forEach(type => {
+      Object.defineProperty(recorder, 'on' + type, {
+        get: () => _handlers[type],
+        set: fn => {
+          if (_handlers[type]) {
+            recorder.em.removeEventListener(type, _handlers[type]);
+            delete _handlers[type];
+          }
+          if (fn) {
+            _handlers[type] = fn;
+            recorder.em.addEventListener(type, fn);
+          }
+        }
+      })
+    });
   }
 
   /**
