@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.7
+* Fixed TypeScript support (by Michal Dabski).
+
 ## 0.3.6
 * Fix echo bug in Safari (by @sseppola).
 
