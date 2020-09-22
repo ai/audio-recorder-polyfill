@@ -96,7 +96,8 @@ class MediaRecorder {
     processor.onaudioprocess = function (e) {
       if (recorder.state === 'recording') {
         recorder.encoder.postMessage([
-          'encode', e.inputBuffer.getChannelData(0)
+          'encode',
+          e.inputBuffer.getChannelData(0)
         ])
       }
     }

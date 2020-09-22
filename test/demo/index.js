@@ -131,7 +131,8 @@ if (MediaRecorder.notSupported) {
   document.getElementById('mode').style.display = 'none'
   document.getElementById('support').style.display = 'block'
 } else {
-  document.getElementById('formats').innerText = 'Format: ' +
+  document.getElementById('formats').innerText =
+    'Format: ' +
     TYPES.filter(i => {
       return MediaRecorder.isTypeSupported(i)
     }).join(', ')

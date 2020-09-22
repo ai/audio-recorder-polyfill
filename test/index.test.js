@@ -30,7 +30,7 @@ function waitForData (recorder) {
   })
 }
 
-let processor = { connect () { }, a: 1 }
+let processor = { connect () {}, a: 1 }
 AudioContext.prototype.createScriptProcessor = () => {
   return processor
 }
@@ -86,9 +86,7 @@ it('has state and state events', async () => {
   expect(events).toEqual(['start', 'pause', 'resume'])
 
   await waitForData(recorder)
-  expect(events).toEqual([
-    'start', 'pause', 'resume', 'dataavailable', 'stop'
-  ])
+  expect(events).toEqual(['start', 'pause', 'resume', 'dataavailable', 'stop'])
 })
 
 it('dispatches error command in wrong state', () => {

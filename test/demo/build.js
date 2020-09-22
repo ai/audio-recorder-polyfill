@@ -12,9 +12,12 @@ let copyFile = promisify(fs.copyFile)
 let unlink = promisify(fs.unlink)
 
 function findAssets (bundle) {
-  return [...bundle.childBundles].reduce((all, i) => {
-    return all.concat(findAssets(i))
-  }, [bundle.name])
+  return [...bundle.childBundles].reduce(
+    (all, i) => {
+      return all.concat(findAssets(i))
+    },
+    [bundle.name]
+  )
 }
 
 const BUILD = path.join(__dirname, 'build')
@@ -37,7 +40,8 @@ async function build () {
   let assets = findAssets(bundle)
 
   let jsFile = assets.find(i => /demo.*\.js/.test(i))
-  let js = (await readFile(jsFile)).toString()
+  let js = (await readFile(jsFile))
+    .toString()
     .replace('function () ', 'function()')
     .replace(/};}\)\(\);$/, '}})()')
   await unlink(jsFile)
@@ -80,10 +84,10 @@ async function build () {
 
   let htmlFile = assets.find(i => path.extname(i) === '.html')
   let html = await readFile(htmlFile)
-  await writeFile(htmlFile, posthtml()
-    .use(htmlPlugin)
-    .process(html, { sync: true })
-    .html)
+  await writeFile(
+    htmlFile,
+    posthtml().use(htmlPlugin).process(html, { sync: true }).html
+  )
 }
 
 build().catch(e => {

@@ -1,9 +1,9 @@
-navigator.mediaDevices = { }
+navigator.mediaDevices = {}
 
 class AudioNode {
-  connect () { }
+  connect () {}
 
-  disconnect () { }
+  disconnect () {}
 }
 
 class ScriptProcessorNode extends AudioNode {}
@@ -26,9 +26,7 @@ class MediaStream {
   }
 
   getTracks () {
-    return [
-      { stop () { } }
-    ]
+    return [{ stop () {} }]
   }
 }
 global.MediaStream = MediaStream
@@ -42,7 +40,7 @@ class Worker {
     this.listener = cb
   }
 
-  postMessage () { }
+  postMessage () {}
 }
 global.Worker = Worker
 
