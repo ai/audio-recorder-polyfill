@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.8
+* Fixed ES modules support.
+
 ## 0.3.7
 * Fixed TypeScript support (by Michal Dabski).
 
