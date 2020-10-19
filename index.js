@@ -37,7 +37,7 @@ class MediaRecorder {
      * @type {MediaStream}
      */
     this.stream = stream
-    this.config = config || {}
+    this.config = config
     /**
      * The current state of recording process.
      * @type {"inactive"|"recording"|"paused"}
