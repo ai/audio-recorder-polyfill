@@ -31,7 +31,7 @@ class MediaRecorder {
   /**
    * @param {MediaStream} stream The audio stream to record.
    */
-  constructor (stream, config) {
+  constructor (stream, config = null) {
     /**
      * The `MediaStream` passed into the constructor.
      * @type {MediaStream}
