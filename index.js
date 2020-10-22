@@ -80,7 +80,7 @@ class MediaRecorder {
     this.state = 'recording'
 
     if (!context) {
-      context = new AudioContext(this.config ? this.config : null)
+      context = new AudioContext(this.config)
     }
     this.clone = this.stream.clone()
     this.input = context.createMediaStreamSource(this.clone)
