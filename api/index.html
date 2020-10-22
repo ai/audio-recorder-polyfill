@@ -1,0 +1,1240 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title>audio-recorder-polyfill 0.4.0 | Documentation</title>
+	<meta name='description' content='MediaRecorder polyfill to record audio in Edge and Safari'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+	<link href='assets/styles.min.css' rel='stylesheet' />
+</head>
+
+<body class='documentation'>
+<div class='px2'>
+	<div class='clearfix md-flex lg-flex flex-stretch mxn2'>
+		<div class='documentation-sidebar relative top-0 bottom-0 right-0 px2 py2 col-3 md-show'>
+			<div class='font-smaller fixed col-3 top-0 bottom-0 left-0 overflow-auto fill-light dark-link'>
+				<div class='px2'>
+					<h3 class='mb0 no-anchor'><code>audio-recorder-polyfill</code></h3>
+					<div class='mb1'><code>0.4.0</code></div>
+					<input placeholder='Filter' id='filter-input' class='col12 block input' type='text' />
+					<div id="toc">
+						
+						
+						
+						<a
+								href='#mediarecorder'
+								class="regular block toggle-sibling">
+							<code>MediaRecorder</code>
+							<span class='icon'>▾</span>
+						</a>
+						
+						
+						<div class='toggle-target'>
+							
+							
+							<a
+									href='#mediarecorderistypesupported'
+									class='button-indent px1 quiet regular rounded block'>
+								<code>.isTypeSupported</code>
+							</a>
+							
+							<a
+									href='#mediarecordernotsupported'
+									class='button-indent px1 quiet regular rounded block'>
+								<code>.notSupported</code>
+							</a>
+							
+							<a
+									href='#mediarecorderencoder'
+									class='button-indent px1 quiet regular rounded block'>
+								<code>.encoder</code>
+							</a>
+							
+							
+							
+							
+							<a
+									href='#mediarecorderstream'
+									class='button-indent regular block'>
+								<code>#stream</code>
+							</a>
+							
+							<a
+									href='#mediarecorderstate'
+									class='button-indent regular block'>
+								<code>#state</code>
+							</a>
+							
+							<a
+									href='#mediarecorderstart'
+									class='button-indent regular block'>
+								<code>#start</code>
+							</a>
+							
+							<a
+									href='#mediarecorderstop'
+									class='button-indent regular block'>
+								<code>#stop</code>
+							</a>
+							
+							<a
+									href='#mediarecorderpause'
+									class='button-indent regular block'>
+								<code>#pause</code>
+							</a>
+							
+							<a
+									href='#mediarecorderresume'
+									class='button-indent regular block'>
+								<code>#resume</code>
+							</a>
+							
+							<a
+									href='#mediarecorderrequestdata'
+									class='button-indent regular block'>
+								<code>#requestData</code>
+							</a>
+							
+							<a
+									href='#mediarecorderaddeventlistener'
+									class='button-indent regular block'>
+								<code>#addEventListener</code>
+							</a>
+							
+							<a
+									href='#mediarecorderremoveeventlistener'
+									class='button-indent regular block'>
+								<code>#removeEventListener</code>
+							</a>
+							
+							<a
+									href='#mediarecorderdispatchevent'
+									class='button-indent regular block'>
+								<code>#dispatchEvent</code>
+							</a>
+							
+							<a
+									href='#mediarecordermimetype'
+									class='button-indent regular block'>
+								<code>#mimeType</code>
+							</a>
+							
+							
+							
+							
+						</div>
+						
+						
+					</div>
+					<div class='mt1 h6 quiet'>
+						<a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class='sm-col-12 md-col-9 lg-col-9 flex flex-column'>
+			<div class='flex-auto full-width'>
+				
+				
+				<section id='mediarecorder'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorder'>
+			<code>
+				MediaRecorder
+				<span class='gray'>(stream, config)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Audio Recorder with MediaRecorder API.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>stream</code></td>
+			<td class='col-3 quiet'>
+				MediaStream
+				
+			</td>
+			<td class='col-6'>The audio stream to record.
+</td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>config</code></td>
+			<td class='col-3 quiet'>
+				any
+				
+				= <code>null</code>
+			</td>
+			<td class='col-6'></td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code>navigator.mediaDevices.getUserMedia({ <span class="hljs-attr">audio</span>: <span class="hljs-literal">true</span> }).then(<span class="hljs-function"><span class="hljs-params">stream</span> =&gt;</span> {
+  <span class="hljs-keyword">let</span> recorder = <span class="hljs-keyword">new</span> MediaRecorder(stream)
+})</code></pre>
+	
+	
+
+	
+	<h4 class='caps quiet mb2 mt3'>Static Members</h4>
+	<div class="section-indent">
+  
+    <section id='mediarecorderistypesupported'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderistypesupported'>
+			<code>
+				isTypeSupported
+				<span class='gray'>(mimeType)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Returns <code>true</code> if the MIME type specified is one the polyfill can record.</p>
+<p>This polyfill supports <code>audio/wav</code> and <code>audio/mpeg</code>.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>mimeType</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+				
+			</td>
+			<td class='col-6'>The mimeType to check.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+	:
+	<span class='force-inline'><code>true</code>
+ on 
+<code>audio/wav</code>
+ and 
+<code>audio/mpeg</code>
+ MIME type.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecordernotsupported'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecordernotsupported'>
+			<code>
+				notSupported
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p><code>true</code> if MediaRecorder can not be polyfilled in the current browser.</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">if</span> (MediaRecorder.notSupported) {
+  showWarning(<span class="hljs-string">'Audio recording is not supported in this browser'</span>)
+}</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderencoder'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderencoder'>
+			<code>
+				encoder
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Converts RAW audio buffer to compressed audio files.
+It will be loaded to Web Worker.
+By default, WAVE encoder will be used.</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code>MediaRecorder.prototype.mimeType = <span class="hljs-string">'audio/ogg'</span>
+MediaRecorder.encoder = oggEncoder</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+</div>
+
+	
+
+	
+	<h4 class='caps quiet mb2 mt3'>Instance Members</h4>
+	<div class="section-indent">
+  
+    <section id='mediarecorderstream'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderstream'>
+			<code>
+				stream
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>The <code>MediaStream</code> passed into the constructor.</p>
+
+	
+	<p>
+		Type:
+		MediaStream
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderstate'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderstate'>
+			<code>
+				state
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>The current state of recording process.</p>
+
+	
+	<p>
+		Type:
+		(<code>"inactive"</code> | <code>"recording"</code> | <code>"paused"</code>)
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderstart'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderstart'>
+			<code>
+				start
+				<span class='gray'>(timeslice?)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Begins recording media.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>timeslice</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?
+				
+			</td>
+			<td class='col-6'>The milliseconds to record into each 
+<code>Blob</code>
+.
+If this parameter isn’t included, single 
+<code>Blob</code>
+
+will be recorded.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></code>
+	:
+	<span class='force-inline'>
+</span>
+	
+	
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code>recordButton.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+  recorder.start()
+})</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderstop'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderstop'>
+			<code>
+				stop
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Stop media capture and raise <code>dataavailable</code> event with recorded data.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></code>
+	:
+	<span class='force-inline'>
+</span>
+	
+	
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code>finishButton.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+  recorder.stop()
+})</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderpause'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderpause'>
+			<code>
+				pause
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Pauses recording of media streams.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></code>
+	:
+	<span class='force-inline'>
+</span>
+	
+	
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code>pauseButton.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+  recorder.pause()
+})</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderresume'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderresume'>
+			<code>
+				resume
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Resumes media recording when it has been previously paused.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></code>
+	:
+	<span class='force-inline'>
+</span>
+	
+	
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code>resumeButton.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+  recorder.resume()
+})</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderrequestdata'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderrequestdata'>
+			<code>
+				requestData
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Raise a <code>dataavailable</code> event containing the captured media.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></code>
+	:
+	<span class='force-inline'>
+</span>
+	
+	
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code><span class="hljs-keyword">this</span>.on(<span class="hljs-string">'nextData'</span>, () =&gt; {
+  recorder.requestData()
+})</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderaddeventlistener'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderaddeventlistener'>
+			<code>
+				addEventListener
+				<span class='gray'>(args, type, listener)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Add listener for specified event type.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>args</code></td>
+			<td class='col-3 quiet'>
+				...any
+				
+			</td>
+			<td class='col-6'></td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>type</code></td>
+			<td class='col-3 quiet'>
+				(<code>"start"</code> | <code>"stop"</code> | <code>"pause"</code> | <code>"resume"</code> | <code>"dataavailable"</code> | <code>"error"</code>)
+				
+			</td>
+			<td class='col-6'>Event type.
+</td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>listener</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a>
+				
+			</td>
+			<td class='col-6'>The listener function.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></code>
+	:
+	<span class='force-inline'>
+</span>
+	
+	
+	
+
+	
+
+	
+	<h4 class='caps quiet mb1 mt3'>Examples</h4>
+	
+	
+	<pre class='p1 overflow-auto round fill-light'><code>recorder.addEventListener(<span class="hljs-string">'dataavailable'</span>, e =&gt; {
+  audio.src = URL.createObjectURL(e.data)
+})</code></pre>
+	
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderremoveeventlistener'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderremoveeventlistener'>
+			<code>
+				removeEventListener
+				<span class='gray'>(args, type, listener)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Remove event listener.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>args</code></td>
+			<td class='col-3 quiet'>
+				...any
+				
+			</td>
+			<td class='col-6'></td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>type</code></td>
+			<td class='col-3 quiet'>
+				(<code>"start"</code> | <code>"stop"</code> | <code>"pause"</code> | <code>"resume"</code> | <code>"dataavailable"</code> | <code>"error"</code>)
+				
+			</td>
+			<td class='col-6'>Event type.
+</td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>listener</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a>
+				
+			</td>
+			<td class='col-6'>The same function used in 
+<code>addEventListener</code>
+.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a></code>
+	:
+	<span class='force-inline'>
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecorderdispatchevent'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecorderdispatchevent'>
+			<code>
+				dispatchEvent
+				<span class='gray'>(args, event)</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>Calls each of the listeners registered for a given event.</p>
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	<table class='table-light mt3 rounded keyline-all keyline-light overflow-hidden bg-cloudy-light'>
+		<thead class='fill-light'>
+		<th class='col-3 small caps quiet'>parameter</th>
+		<th class='col-3 small caps quiet'>type</th>
+		<th class='col-6 small caps quiet'>description</th>
+		</thead>
+		
+		<tr>
+			<td class='col-3 strong'><code>args</code></td>
+			<td class='col-3 quiet'>
+				...any
+				
+			</td>
+			<td class='col-6'></td>
+		</tr>
+		
+		
+		<tr>
+			<td class='col-3 strong'><code>event</code></td>
+			<td class='col-3 quiet'>
+				<a href="https://developer.mozilla.org/docs/Web/API/Event">Event</a>
+				
+			</td>
+			<td class='col-6'>The event object.
+</td>
+		</tr>
+		
+		
+	</table>
+	
+
+	
+
+	
+	
+	<h4 class='caps quiet mb1 mt3'>Returns</h4>
+	<code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+	:
+	<span class='force-inline'>Is event was no canceled by any listener.
+</span>
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+    <section id='mediarecordermimetype'class='mt2 mb2 px3 py1 keyline-top'>
+
+	<div class='right py2'>
+		
+		
+	</div>
+
+	<h3 class='regular'>
+		<a class='black' href='#mediarecordermimetype'>
+			<code>
+				mimeType
+				<span class='gray'>()</span>
+			</code>
+		</a>
+	</h3>
+
+	<p>The MIME type that is being used for recording.</p>
+
+	
+	<p>
+		Type:
+		<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+	</p>
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+</section>
+
+  
+</div>
+
+	
+
+	
+
+	
+</section>
+
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script src='assets/scripts.min.js'></script>
+</body>
+</html>
