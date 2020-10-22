@@ -31,13 +31,13 @@ class MediaRecorder {
   /**
    * @param {MediaStream} stream The audio stream to record.
    */
-  constructor (stream) {
+  constructor (stream, config = null) {
     /**
      * The `MediaStream` passed into the constructor.
      * @type {MediaStream}
      */
     this.stream = stream
-
+    this.config = config
     /**
      * The current state of recording process.
      * @type {"inactive"|"recording"|"paused"}
@@ -80,7 +80,7 @@ class MediaRecorder {
     this.state = 'recording'
 
     if (!context) {
-      context = new AudioContext()
+      context = new AudioContext(this.config)
     }
     this.clone = this.stream.clone()
     this.input = context.createMediaStreamSource(this.clone)
