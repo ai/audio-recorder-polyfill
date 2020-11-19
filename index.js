@@ -17,7 +17,7 @@ function error (method) {
   return event
 }
 
-let context, processor
+let context
 
 /**
  * Audio Recorder with MediaRecorder API.
@@ -84,16 +84,13 @@ class MediaRecorder {
     }
     this.clone = this.stream.clone()
     this.input = context.createMediaStreamSource(this.clone)
-
-    if (!processor) {
-      processor = context.createScriptProcessor(2048, 1, 1)
-    }
+    this.processor = context.createScriptProcessor(2048, 1, 1)
 
     let recorder = this
 
     recorder.encoder.postMessage(['init', context.sampleRate])
 
-    processor.onaudioprocess = function (e) {
+    this.processor.onaudioprocess = function (e) {
       if (recorder.state === 'recording') {
         recorder.encoder.postMessage([
           'encode',
@@ -102,8 +99,8 @@ class MediaRecorder {
       }
     }
 
-    this.input.connect(processor)
-    processor.connect(context.destination)
+    this.input.connect(this.processor)
+    this.processor.connect(context.destination)
 
     this.em.dispatchEvent(new Event('start'))
 
@@ -136,6 +133,7 @@ class MediaRecorder {
     this.clone.getTracks().forEach(track => {
       track.stop()
     })
+    this.processor.disconnect()
     this.input.disconnect()
     return clearInterval(this.slicing)
   }
