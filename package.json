@@ -19,7 +19,7 @@
     "spell": "yaspeller-ci *.md test/demo/build/api/*.html",
     "clean": "rimraf coverage/ test/demo/build/",
     "api": "documentation build -o test/demo/build/api/ -f html --theme node_modules/documentation-theme-light *.js",
-    "test": "jest --coverage && eslint . && size-limit && yarn build && yarn spell",
+    "test": "jest --coverage && eslint . && size-limit --highlight-less && yarn build && yarn spell",
     "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
     "build": "yarn clean && yarn api && NODE_ENV=production node ./test/demo/build.js"
   },
