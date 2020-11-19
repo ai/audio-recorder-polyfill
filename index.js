@@ -2,7 +2,7 @@ let waveEncoder = require('./wave-encoder')
 
 let AudioContext = window.AudioContext || window.webkitAudioContext
 
-function createWorker (fn) {
+let createWorker = fn => {
   let js = fn
     .toString()
     .replace(/^(\(\)\s*=>|function\s*\(\))\s*{/, '')
@@ -11,7 +11,7 @@ function createWorker (fn) {
   return new Worker(URL.createObjectURL(blob))
 }
 
-function error (method) {
+let error = method => {
   let event = new Event('error')
   event.data = new Error('Wrong state for ' + method)
   return event
@@ -86,16 +86,11 @@ class MediaRecorder {
     this.input = context.createMediaStreamSource(this.clone)
     this.processor = context.createScriptProcessor(2048, 1, 1)
 
-    let recorder = this
+    this.encoder.postMessage(['init', context.sampleRate])
 
-    recorder.encoder.postMessage(['init', context.sampleRate])
-
-    this.processor.onaudioprocess = function (e) {
-      if (recorder.state === 'recording') {
-        recorder.encoder.postMessage([
-          'encode',
-          e.inputBuffer.getChannelData(0)
-        ])
+    this.processor.onaudioprocess = e => {
+      if (this.state === 'recording') {
+        this.encoder.postMessage(['encode', e.inputBuffer.getChannelData(0)])
       }
     }
 
@@ -106,7 +101,7 @@ class MediaRecorder {
 
     if (timeslice) {
       this.slicing = setInterval(() => {
-        if (recorder.state === 'recording') recorder.requestData()
+        if (this.state === 'recording') this.requestData()
       }, timeslice)
     }
 
