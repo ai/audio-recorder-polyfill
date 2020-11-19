@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.4.1
+* Fix Safari playback icon (by @fjwong).
+
 ## 0.4
 * Add `sampleRate` option support (by @HuiGeGeGitHub).
 
