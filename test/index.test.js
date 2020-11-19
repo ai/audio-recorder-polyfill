@@ -30,7 +30,7 @@ function waitForData (recorder) {
   })
 }
 
-let processor = { connect () {}, a: 1 }
+let processor = { connect () {}, disconnect () {}, a: 1 }
 AudioContext.prototype.createScriptProcessor = () => {
   return processor
 }
