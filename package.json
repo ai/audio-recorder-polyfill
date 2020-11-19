@@ -16,8 +16,7 @@
     "mp3"
   ],
   "scripts": {
-    "spell": "yaspeller-ci *.md test/demo/build/api/*.html",
-    "clean": "rimraf coverage/ test/demo/build/",
+    "spell": "yaspeller *.md test/demo/build/api/*.html",
     "api": "documentation build -o test/demo/build/api/ -f html --theme node_modules/documentation-theme-light *.js",
     "test": "jest --coverage && eslint . && size-limit --highlight-less && yarn build && yarn spell",
     "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
@@ -53,9 +52,8 @@
     "parcel-bundler": "^1.12.4",
     "posthtml": "^0.14.0",
     "pug": "^3.0.0",
-    "rimraf": "^3.0.2",
     "size-limit": "^4.8.0",
-    "yaspeller-ci": "^1.0.2"
+    "yaspeller": "^7.0.0"
   },
   "jest": {
     "coverageThreshold": {
