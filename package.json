@@ -18,7 +18,7 @@
   "scripts": {
     "spell": "yaspeller *.md test/demo/build/api/*.html",
     "api": "documentation build -o test/demo/build/api/ -f html --theme node_modules/documentation-theme-light *.js",
-    "test": "jest --coverage && eslint . && size-limit --highlight-less && yarn build && yarn spell",
+    "test": "jest --coverage && eslint . && size-limit && yarn build && yarn spell",
     "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
     "build": "yarn api && NODE_ENV=production node ./test/demo/build.js"
   },
@@ -27,11 +27,11 @@
   "repository": "ai/audio-recorder-polyfill",
   "devDependencies": {
     "@logux/eslint-config": "^42.2.2",
-    "@size-limit/preset-small-lib": "^4.8.0",
+    "@size-limit/preset-small-lib": "^4.9.0",
     "documentation": "^13.1.0",
     "documentation-theme-light": "^1.1.1",
-    "dual-publish": "^0.11.0",
-    "eslint": "^7.13.0",
+    "dual-publish": "^1.0.3",
+    "eslint": "^7.14.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-import-helpers": "^1.1.0",
@@ -52,7 +52,7 @@
     "parcel-bundler": "^1.12.4",
     "posthtml": "^0.14.0",
     "pug": "^3.0.0",
-    "size-limit": "^4.8.0",
+    "size-limit": "^4.9.0",
     "yaspeller": "^7.0.0"
   },
   "jest": {
