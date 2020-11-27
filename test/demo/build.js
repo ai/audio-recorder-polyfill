@@ -63,7 +63,7 @@ async function build () {
           {
             tag: 'link',
             attrs: {
-              rel: 'shortcut icon',
+              rel: 'icon',
               href: './favicon.ico'
             }
           }
