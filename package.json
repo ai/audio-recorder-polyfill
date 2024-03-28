@@ -16,9 +16,8 @@
     "mp3"
   ],
   "scripts": {
-    "spell": "yaspeller *.md test/demo/build/api/*.html",
     "api": "documentation build -o test/demo/build/api/ -f html --theme node_modules/documentation-theme-light *.js",
-    "test": "jest --coverage && eslint . && size-limit && yarn build && yarn spell",
+    "test": "jest --coverage && eslint . && size-limit && yarn build",
     "start": "parcel serve -d ./test/demo/build ./test/demo/index.pug ./test/demo/polyfill.js --open",
     "build": "yarn api && NODE_ENV=production node ./test/demo/build.js"
   },
@@ -51,8 +50,7 @@
     "posthtml": "^0.15.1",
     "pug": "^3.0.0",
     "simple-git-hooks": "^2.0.2",
-    "size-limit": "^4.9.0",
-    "yaspeller": "^7.0.0"
+    "size-limit": "^4.9.0"
   },
   "jest": {
     "coverageThreshold": {
