@@ -4,7 +4,8 @@
      src="./logo.svg"
      title="Audio Recorder Polyfill Logo">
 
-**DEPRECATED:** you do not need this polyfill for modern browsers.
+> [!WARNING]
+> **Deprecated: You do not need this polyfill for modern browsers**
 
 [MediaRecorder] polyfill to record audio in Edge and Safari.
 Try it in **[online demo]** and see **[API]**.
